@@ -23,7 +23,7 @@ class CourseDelete extends Component {
       "http://localhost:4000/api/course/delete/" + this.props.match.params.id
     );
 
-    this.props.history.push("/courselist");
+    this.props.history.push("/managecourse");
   }
   render() {
     return (

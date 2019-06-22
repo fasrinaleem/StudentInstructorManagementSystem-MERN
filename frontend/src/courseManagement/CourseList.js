@@ -3,37 +3,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Course = props => (
-  <tr>
-    <td> {props.course.courseName} </td>
-    <td> {props.course.instructorName} </td>
-    <td> {props.course.year} </td>
-    <td>
-      <Link
-        to={"/update/" + props.course._id}
-        style={{
-          backgroundColor: "#82f441",
-          color: "blue",
-          fontSize: 15
-        }}
-      >
-        {" "}
-        Edit{" "}
-      </Link>
-      <Link
-        to={"/delete/" + props.course._id}
-        style={{
-          backgroundColor: "#82f441",
-          color: "blue",
-          fontSize: 15
-        }}
-      >
-        {" "}
-        Delete{" "}
-      </Link>
-    </td>
-  </tr>
-);
 class CourseList extends Component {
   constructor(props) {
     super(props);
@@ -63,33 +32,59 @@ class CourseList extends Component {
   }
 
   courseList() {
-    return this.state.courses.map(function(currentCourse, i) {
-      return <Course course={currentCourse} key={i} />;
+    return this.state.courses.map(function(currentCourse) {
+      return (
+        // <div className="row">
+        // <div className="col-md-4">
+        <div
+          className="card"
+          key={currentCourse.id}
+          style={{ marginBottom: "20px", marginTop: "20px" }}
+        >
+          <div className="card-header">{currentCourse.courseName}</div>
+          <div className="card-body"> {currentCourse.description}</div>
+          <div className="card-body"> {currentCourse.duration}</div>
+          <div className="card-footer">
+            <Link
+              to={"/viewcourse/"}
+              className=" btn btn-info"
+              style={{
+                fontSize: "15px",
+                width: "500px"
+              }}
+            >
+              <span> View More </span>
+            </Link>
+            {"  "}
+            <Link
+              to={"/courseentroll/" + currentCourse._id}
+              className=" btn btn-success"
+              style={{
+                fontSize: "15px",
+                width: "500px"
+              }}
+            >
+              <span> Entroll Course </span>
+            </Link>
+          </div>
+        </div>
+      );
     });
   }
 
   render() {
     return (
       <div>
-        <h3
+        <div
+          className="raw"
           style={{
-            color: "white"
+            marginLeft: "30px",
+            marginRight: "20px",
+            marginBottom: "20px"
           }}
         >
-          {" "}
-          Courses{" "}
-        </h3>
-        <table className="table table-striped" style={{ marginTop: 20 }}>
-          <thead>
-            <tr>
-              <th> Course Name </th>
-              <th> Instructor Name </th>
-              <th> Year </th>
-              <th> Actions </th>
-            </tr>
-          </thead>
-          <tbody>{this.courseList()}</tbody>
-        </table>
+          <div className="col-md- ">{this.courseList()} </div>
+        </div>
       </div>
     );
   }

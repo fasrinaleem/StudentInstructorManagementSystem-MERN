@@ -8,21 +8,43 @@ class CourseList extends Component {
     super(props);
 
     this.onChangeCourseName = this.onChangeCourseName.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeInstructorName = this.onChangeInstructorName.bind(this);
-    //    this.onChangeYear = this.onChangeYear.bind(this);
+    this.onChangeStartDate = this.onChangeStartDate.bind(this);
+    this.onChangeDuration = this.onChangeDuration.bind(this);
+    // this.onChangeInstructorList = this.onChangeInstructorList.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       courseName: "",
+      description: "",
       instructorName: "",
-      //    year: "",
+      startDate: "",
+      duration: "",
       errors: {}
+      // instructorList: []
     };
   }
+
+  // componentDidMount() {
+  //   axios
+  //     .get("http://localhost:4000/api/instructor/all/")
+  //     .then(response => {
+  //       this.setState({ instructorList: response.data });
+  //     })
+  //     .catch(function(error) {
+  //       console.log(error);
+  //     });
+  // }
 
   onChangeCourseName(e) {
     this.setState({
       courseName: e.target.value
+    });
+  }
+  onChangeDescription(e) {
+    this.setState({
+      description: e.target.value
     });
   }
   onChangeInstructorName(e) {
@@ -30,20 +52,41 @@ class CourseList extends Component {
       instructorName: e.target.value
     });
   }
-  // onChangeYear(e) {
+  onChangeStartDate(e) {
+    this.setState({
+      startDate: e.target.value
+    });
+  }
+  onChangeDuration(e) {
+    this.setState({
+      duration: e.target.value
+    });
+  }
+  // onChangeInstructorList(e) {
   //   this.setState({
-  //     year: e.target.value
+  //     instructorList: e.target.value
   //   });
   // }
 
   onSubmit(e) {
     e.preventDefault();
 
-    const { courseName, instructorName, year } = this.state;
+    const {
+      courseName,
+      description,
+      instructorName,
+      startDate,
+      duration
+      // instructorList
+    } = this.state;
 
-    //Check for errors
+    //Check for errors & Set State
     if (courseName === "") {
       this.setState({ errors: { courseName: "Course Name is required" } });
+      return;
+    }
+    if (description === "") {
+      this.setState({ errors: { description: "Description is required" } });
       return;
     }
     if (instructorName === "") {
@@ -52,20 +95,34 @@ class CourseList extends Component {
       });
       return;
     }
-    // if (year === "") {
-    //   this.setState({ errors: { year: "Year is required" } });
+    if (startDate === "") {
+      this.setState({ errors: { startDate: "Starting Date is required" } });
+      return;
+    }
+    if (duration === "") {
+      this.setState({ errors: { duration: "Duration is required" } });
+      return;
+    }
+    // if (instructorList === "") {
+    //   this.setState({ errors: { instructorList: "Instructor is required" } });
     //   return;
     // }
 
     console.log(`Form Submitted`);
     console.log(`Course Name : ${this.state.courseName}`);
+    console.log(`Description : ${this.state.description}`);
     console.log(`Instructor Name : ${this.state.instructorName}`);
-    console.log(`Year : ${this.state.year}`);
+    console.log(`Start Date : ${this.state.startDate}`);
+    console.log(`Duration : ${this.state.duration}`);
+    // console.log(`Instructor List : ${this.state.instructorList}`);
 
     const newUser = {
       courseName: this.state.courseName,
+      description: this.state.description,
       instructorName: this.state.instructorName,
-      year: this.state.year
+      startDate: this.state.startDate,
+      duration: this.state.duration
+      // instructorList: this.state.instructorList
     };
 
     axios.post("http://localhost:4000/api/course/add", newUser).then(res => {
@@ -76,15 +133,15 @@ class CourseList extends Component {
     // //Clear state after error checking(When click submit button)
     this.setState({
       courseName: "",
-      instructorName: ""
-      //    year: ""
+      description: "",
+      instructorName: "",
+      startDate: "",
+      duration: ""
+      // instructorList: ""
     });
   }
 
-  //   onChange = e => this.setState({ [e.target.name]: e.target.value });
-
   render() {
-    //  const { courseName, instructorName, year, errors } = this.state;
     const { errors } = this.state;
 
     return (
@@ -106,51 +163,55 @@ class CourseList extends Component {
                     error={errors.courseName}
                   />
                   <TextInputGroup
+                    label="Description"
+                    name="description"
+                    placeholder=" Enter Description"
+                    value={this.state.description}
+                    onChange={this.onChangeDescription}
+                    error={errors.description}
+                  />
+                  {/* <TextInputGroup
                     label="Instructor Name"
                     name="instructorName"
                     placeholder=" Enter Instructor Name"
                     value={this.state.instructorName}
                     onChange={this.onChangeInstructorName}
                     error={errors.instructorName}
+                  /> */}
+                  <TextInputGroup
+                    label="Starting Date"
+                    type="date"
+                    name="startDate"
+                    placeholder=" Enter Starting Name"
+                    value={this.state.startDate}
+                    onChange={this.onChangeStartDate}
+                    error={errors.startDate}
                   />
-                  {/* <div className="form-group">
-                    <div className="form-check form-check-inline">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="year"
-                        id="year1"
-                        value="year1"
-                        checked={this.state.year === "Year 01"}
-                        onChange={this.onChangeYear}
-                      />
-                      <label className="form-check-label"> Year 01 </label>
-                    </div>
-                    <div className="form-check form-check-inline">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="year"
-                        id="year2"
-                        value="year2"
-                        checked={this.state.year === "Year 02"}
-                        onChange={this.onChangeYear}
-                      />
-                      <label className="form-check-label"> Year 02 </label>
-                    </div>
-                    <div className="form-check form-check-inline">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="year"
-                        id="year3"
-                        value="year3"
-                        checked={this.state.year === "Year 03"}
-                        onChange={this.onChangeYear}
-                      />
-                      <label className="form-check-label"> Year 03 </label>
-                    </div>
-                  </div> */}
+                  <TextInputGroup
+                    label="Duration"
+                    name="duration"
+                    placeholder=" Enter Duration"
+                    value={this.state.duration}
+                    onChange={this.onChangeDuration}
+                    error={errors.duration}
+                  />
+                  {/* <select
+                    className="form-control"
+                    name="instructorList"
+                    value={this.state.instructorList}
+                    onChange={this.onChangeInstructorList}
+                  >
+                    {this.state.instructorList.map(instructorName => {
+                      return (
+                        <option
+                          value={instructorName._id}
+                          key={instructorName._id}
+                        >
+                          {instructorName.name}{" "}
+                        </option>
+                      );
+                    })}
+                  </select> */}
                   <div>
                     <button
                       class="btn waves-effect waves-light"

@@ -10,32 +10,9 @@ const Course = props => (
     <td> {props.course.instructorName} </td>
     <td> {props.course.startDate} </td>
     <td> {props.course.duration} </td>
-    <td>
-      <Link
-        to={"/update/" + props.course._id}
-        className=" btn btn-warning"
-        style={{
-          fontSize: "15px",
-          width: "100px"
-        }}
-      >
-        <span> edit</span>
-      </Link>
-      {"  "}
-      <Link
-        to={"/delete/" + props.course._id}
-        className="btn btn-danger"
-        style={{
-          fontSize: "15px",
-          width: "100px"
-        }}
-      >
-        <span> delete</span>
-      </Link>
-    </td>
   </tr>
 );
-class CourseList extends Component {
+class ViewCourse extends Component {
   constructor(props) {
     super(props);
     this.state = { courses: [] };
@@ -88,7 +65,6 @@ class CourseList extends Component {
               <th> Instructor Name </th>
               <th> Start Date </th>
               <th> Duration </th>
-              <th> Actions </th>
             </tr>
           </thead>
           <tbody>{this.courseList()}</tbody>
@@ -98,4 +74,4 @@ class CourseList extends Component {
   }
 }
 
-export default CourseList;
+export default ViewCourse;

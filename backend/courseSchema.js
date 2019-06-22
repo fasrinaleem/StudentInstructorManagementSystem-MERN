@@ -5,10 +5,19 @@ let schemaCourse = new Schema({
   courseName: {
     type: String
   },
-  instructorName: {
+  description: {
     type: String
   },
-  year: {
+  instructorName: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "instructor"
+    }
+  ],
+  startDate: {
+    type: Date
+  },
+  duration: {
     type: String
   }
 });
