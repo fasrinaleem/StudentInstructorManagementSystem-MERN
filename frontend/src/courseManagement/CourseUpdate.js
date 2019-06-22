@@ -19,7 +19,7 @@ class CourseUpdate extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:4000/course/" + this.props.match.params.id)
+      .get("http://localhost:4000/api/course/" + this.props.match.params.id)
       .then(response => {
         this.setState({
           courseName: response.data.courseName,
@@ -60,7 +60,7 @@ class CourseUpdate extends Component {
 
     axios
       .post(
-        "http://localhost:4000/course/update/" + this.props.match.params.id,
+        "http://localhost:4000/api/course/update/" + this.props.match.params.id,
         updatedCourse
       )
       .then(res => console.log(res.data));

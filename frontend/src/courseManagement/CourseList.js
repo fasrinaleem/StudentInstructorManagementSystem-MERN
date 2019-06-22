@@ -42,7 +42,7 @@ class CourseList extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:4000/course/")
+      .get("http://localhost:4000/api/course/")
       .then(response => {
         this.setState({ courses: response.data });
       })
@@ -53,7 +53,7 @@ class CourseList extends Component {
 
   componentDidUpdate() {
     axios
-      .get("http://localhost:4000/course/")
+      .get("http://localhost:4000/api/course/")
       .then(response => {
         this.setState({ courses: response.data });
       })

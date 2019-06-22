@@ -68,7 +68,7 @@ class CourseList extends Component {
       year: this.state.year
     };
 
-    axios.post("http://localhost:4000/course/add", newUser).then(res => {
+    axios.post("http://localhost:4000/api/course/add", newUser).then(res => {
       console.log(res.data);
       this.props.history.push(`/courselist`);
     });
