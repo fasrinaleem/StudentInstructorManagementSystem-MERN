@@ -29,7 +29,7 @@ class AdminUpdate  extends Component{
                   this.setState({
                       name: response.data.name,
                       mail: response.data.mail,
-                      number: response.data.number,
+                      contactNumber: response.data.contactNumber,
                       password: response.data.password
                   })   
               })
@@ -75,7 +75,7 @@ class AdminUpdate  extends Component{
       const obj = {
           name: this.state.name,
           mail: this.state.mail,
-          number: this.state.number,
+          contactNumber: this.state.contactNumber,
           password: this.state.password
       };
       console.log(obj);
