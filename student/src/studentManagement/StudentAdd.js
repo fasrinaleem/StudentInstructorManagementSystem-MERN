@@ -151,6 +151,7 @@ class StudentAdd extends Component {
                     label=""
                     name="email"
                     placeholder=" Email"
+                    type="email"
                     value={this.state.email}
                     onChange={this.onChangeEmail}
                     error={errors.email}

@@ -2,15 +2,20 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Moment from "react-moment"; 
 
 const Assignment = props => (
   <tr>
     <td> {props.assignments.name} </td>
-    <td> {props.assignments.status} </td> <td> {props.assignments.dueDate} </td>
+    <td> {props.assignments.status} </td> 
+    <td> {props.assignments.dueDate} </td>
+   
+    <td>  <Moment diff="2019-06-23" unit="days">{props.assignments.dueDate}</Moment> days left </td>{" "}
+
     <td> {props.assignments.file} </td>{" "}
     <td>
       <Link
-        to= "/assignmentupload"
+        to={ "/assignmentupload/" + props.assignments._id}
         className="btn btn-danger"
         style={{ fontSize: "15px", width: "100px" }}
       >
@@ -59,10 +64,11 @@ class LinkAssignment extends Component {
               <th> Assignment Name </th>
               <th> Satus </th>
               <th> Due date </th>
-              <th> File </th>{" "}
+              <th> Days left </th>
+              
             </tr>{" "}
           </thead>{" "}
-          <tbody> {this.assignmentList()} </tbody>{" "}
+          <tbody>   {this.assignmentList()}  </tbody>{" "}
         </table>{" "}
       </div>
     );

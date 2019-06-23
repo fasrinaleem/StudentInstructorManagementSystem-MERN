@@ -10,9 +10,22 @@ class AssignmentUpload extends Component {
     super(props);
     this.state = { students: [] };
 
+    this.onChangeName = this.onChangeName.bind(this);
+
     this.state = {
       selectedFile: null
     };
+
+    this.state = {
+      name: "",
+      
+    };
+  }
+
+  onChangeName(e) {
+    this.setState({
+      name: e.target.value
+    });
   }
   onChangeHandler = event => {
     console.log(event.target.files[0]);
@@ -21,7 +34,8 @@ class AssignmentUpload extends Component {
   onChangeHandler = event => {
     this.setState({
       selectedFile: event.target.files[0],
-      loaded: 0
+      loaded: 0,
+     
     });
   };
 
@@ -46,13 +60,36 @@ class AssignmentUpload extends Component {
         alert("upload fail");
       });
   };
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:4000/api/assignments/" + this.props.match.params.id)
+      .then(response => {
+        this.setState({
+          name: response.data.name,
+      
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+   }
+  
   render() {
     return (
       <div class="container">
         <div class="row">
           <div class="offset-md-3 col-md-6">
             <div class="form-group files">
-              <label>Upload Your File </label>
+
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.name}
+              onChange={this.onChangeName}
+            />{" "}
+
+              <label > Upload your file for assignment  </label>
               <input
                 type="file"
                 class="form-control"

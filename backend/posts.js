@@ -12,7 +12,7 @@ var storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         // cb(null, file.fieldname + '-' + Date.now() + '.docs')
-        cb(null, Date.now() + '-' +file.originalname )
+        cb(null,  + '-' +file.originalname )
     }
 });
 

@@ -31,4 +31,13 @@ router.get("/all" ,(req,res) => {
 
 })
 
+//view assignment with id
+router.get("/:id", (req, res)=>
+{
+    let id = req.params.id;
+    Assignmentmodel.findById(id, (err, Assignment)=>{
+        res.json(Assignment)
+    })
+});
+
 module.exports = router;

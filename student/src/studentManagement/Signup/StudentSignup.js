@@ -67,12 +67,13 @@ class StudentSignup extends Component {
       this.setState({ errors: { studentName: "student Name is required" } });
       return;
     }
-    if (email === "") {
+    if (email === "" ) {
       this.setState({
         errors: { email: "Email is required" }
       });
       return;
     }
+
     if (nic === "") {
       this.setState({
         errors: { nic: "NIC number is required" }
@@ -151,6 +152,7 @@ class StudentSignup extends Component {
                     label=""
                     name="email"
                     placeholder=" Email"
+                    type="email"
                     value={this.state.email}
                     onChange={this.onChangeEmail}
                     error={errors.email}

@@ -36,7 +36,7 @@ class StudentUpdate extends Component {
       .catch(function(error) {
         console.log(error);
       });
-  }
+   }
 
   onChangeStudentName(e) {
     this.setState({
