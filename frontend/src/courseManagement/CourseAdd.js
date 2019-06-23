@@ -197,21 +197,6 @@ class CourseAdd extends Component {
                     })}
                   </select>
 
-                  {/* <select
-                    name="instructors"
-                    id="instructors"
-                    className="form-control"
-                    onChange={this.onChangeInstructor}
-                    required
-                  >
-                    <option value="">-------</option>
-                    {this.state.instructorsList.map(instructor => (
-                      <option value={instructor._id} key={instructor._id}>
-                        {instructor.name}
-                      </option>
-                    ))}
-                  </select> */}
-
                   <div>
                     <button
                       class="btn waves-effect waves-light"
