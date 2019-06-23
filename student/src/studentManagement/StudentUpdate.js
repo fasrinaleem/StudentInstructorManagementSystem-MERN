@@ -77,7 +77,7 @@ class StudentUpdate extends Component {
         "http://localhost:4000/api/student/update/" + this.props.match.params.id,
         updatedStudent
       )
-      .then(res => console.log(res.data));
+      .then(res => console.log(res.data), alert("student updated successfully"));
 
     this.props.history.push("/");
   }

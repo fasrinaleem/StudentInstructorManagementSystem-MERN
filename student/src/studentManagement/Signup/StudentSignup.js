@@ -109,7 +109,7 @@ class StudentSignup extends Component {
 
     axios
       .post("http://localhost:4000/api/student/add", newUser)
-      .then(res => console.log(res.data));
+      .then(res => console.log(res.data), alert("You are successfully registered"));
 
     //Clear state after error checking(When click submit button)
     this.setState({
