@@ -6,8 +6,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Student = props => (
   <tr>
     <td> {props.student.studentName} </td>{" "}
-    <td> {props.student.instructorName} </td> 
-    <td> {props.student.year} </td>{" "}
+    <td> {props.student.email} </td> {" "}
+    <td> {props.student.nic} </td>{" "}
+    <td> {props.student.course} </td>{" "}
     <td>
       <Link to={"/update/" + props.student._id}> Edit </Link>{" "}
       <Link to={"/delete/" + props.student._id}> Delete </Link>{" "}
@@ -22,7 +23,7 @@ class StudentList extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:4000/student/")
+      .get("http://localhost:4000/api/student/")
       .then(response => {
         this.setState({ students: response.data });
       })
@@ -33,7 +34,7 @@ class StudentList extends Component {
 
   componentDidUpdate() {
     axios
-      .get("http://localhost:4000/student/")
+      .get("http://localhost:4000/api/student/")
       .then(response => {
         this.setState({ students: response.data });
       })
@@ -56,9 +57,9 @@ class StudentList extends Component {
           <thead>
             <tr>
               <th> student Name </th> 
-              <th> Instructor Name </th> 
-              <th> Year </th>{" "}
-              <th> Actions </th>{" "}
+              <th> Email </th> 
+              <th> NIC number </th>{" "}
+              <th> Course </th>{" "}
             </tr>{" "}
           </thead>{" "}
           <tbody> {this.studentList()} </tbody>{" "}

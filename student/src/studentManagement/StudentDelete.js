@@ -10,7 +10,7 @@ class StudentDelete extends Component {
 
   componentDidMount() {
     axios
-      .delete("http://localhost:4000/student/" + this.props.match.params.id)
+      .delete("http://localhost:4000/api/student/delete" + this.props.match.params.id)
       .then(response => {})
       .catch(function(error) {
         console.log(error);
@@ -20,7 +20,7 @@ class StudentDelete extends Component {
   onSubmit(e) {
     e.preventDefault();
     axios.delete(
-      "http://localhost:4000/student/delete/" + this.props.match.params.id
+      "http://localhost:4000/api/student/delete/" + this.props.match.params.id
     );
 
     this.props.history.push("/");

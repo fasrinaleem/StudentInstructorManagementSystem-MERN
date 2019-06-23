@@ -3,19 +3,22 @@ import TextInputGroup from "./layout/TextInputGroup";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-class StudentList extends Component {
+class StudentAdd extends Component {
   constructor(props) {
     super(props);
 
     this.onChangeStudentName = this.onChangeStudentName.bind(this);
-    this.onChangeInstructorName = this.onChangeInstructorName.bind(this);
-    //    this.onChangeYear = this.onChangeYear.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangeNic = this.onChangeNic.bind(this);
+    this.onChangeCourse = this.onChangeCourse.bind(this);
+
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       studentName: "",
-      instructorName: "",
-      //    year: "",
+      email: "",
+      nic: "",
+      course: "",
       errors: {}
     };
   }
@@ -25,65 +28,80 @@ class StudentList extends Component {
       studentName: e.target.value
     });
   }
-  onChangeInstructorName(e) {
+  onChangeEmail(e) {
     this.setState({
-      instructorName: e.target.value
+      email: e.target.value
     });
   }
-  // onChangeYear(e) {
-  //   this.setState({
-  //     year: e.target.value
-  //   });
-  // }
-
+  onChangeNic(e) {
+    this.setState({
+      nic: e.target.value
+    });
+  }
+  onChangeCourse(e) {
+    this.setState({
+      course: e.target.value
+    });
+  }
+  
   onSubmit(e) {
     e.preventDefault();
 
-    const { studentName, instructorName, year } = this.state;
+    const { studentName, email, nic, course } = this.state;
 
     //Check for errors
     if (studentName === "") {
       this.setState({ errors: { studentName: "student Name is required" } });
       return;
     }
-    if (instructorName === "") {
+    if (email === "") {
       this.setState({
-        errors: { instructorName: "Instructor Name is required" }
+        errors: { email: "Email is required" }
       });
       return;
     }
-    // if (year === "") {
-    //   this.setState({ errors: { year: "Year is required" } });
-    //   return;
-    // }
+    if (nic === "") {
+      this.setState({
+        errors: { nic: "NIC number is required" }
+      });
+      return;
+    }
+    if (course === "") {
+      this.setState({
+        errors: { course: "Course is required" }
+      });
+      return;
+    }
 
     console.log(`Form Submitted`);
     console.log(`student Name : ${this.state.studentName}`);
-    console.log(`Instructor Name : ${this.state.instructorName}`);
-    console.log(`Year : ${this.state.year}`);
+    console.log(`Email Name : ${this.state.email}`);
+    console.log(`NIC Name : ${this.state.nic}`);
+    console.log(`Course Name : ${this.state.course}`);
+   
 
     const newUser = {
       studentName: this.state.studentName,
-      instructorName: this.state.instructorName,
-      year: this.state.year
+      email: this.state.email,
+      nic: this.state.nic,
+      course: this.state.course,
+      
     };
 
     axios
-      .post("http://localhost:4000/student/add", newUser)
+      .post("http://localhost:4000/api/student/add", newUser)
       .then(res => console.log(res.data));
 
-    // //Clear state after error checking(When click submit button)
+    //Clear state after error checking(When click submit button)
     this.setState({
       studentName: "",
-      instructorName: ""
-      //    year: ""
+      email: "",
+      nic: "",
+      course: ""  
     });
   }
 
-  //   onChange = e => this.setState({ [e.target.name]: e.target.value });
-
   render() {
-    //  const { studentName, instructorName, year, errors } = this.state;
     const { errors } = this.state;
 
     return (
@@ -92,26 +110,49 @@ class StudentList extends Component {
           <div className="card mb-3" style={{ width: "700px" }}>
             <div style={{ width: "700px" }}>
               <div className="card-header">
-                <b> Add New student </b>{" "}
+                <b> Add new Student </b>{" "}
+              </div>{" "}
+              <div className="card-header">
+                <b> Please enter full information and click submit</b>{" "}
               </div>{" "}
               <div className="çard-body">
+
                 <form onSubmit={this.onSubmit}>
                   <TextInputGroup
-                    label="student Name"
+                    label=""
                     name="studentName"
-                    placeholder=" Enter student Name"
+                    placeholder=" Full
+                     Name"
                     value={this.state.studentName}
                     onChange={this.onChangeStudentName}
                     error={errors.studentName}
                   />{" "}
+
                   <TextInputGroup
-                    label="Instructor Name"
-                    name="instructorName"
-                    placeholder=" Enter Instructor Name"
-                    value={this.state.instructorName}
-                    onChange={this.onChangeInstructorName}
-                    error={errors.instructorName}
+                    label=""
+                    name="email"
+                    placeholder=" Email"
+                    value={this.state.email}
+                    onChange={this.onChangeEmail}
+                    error={errors.email}
                   />{" "}
+
+                  <TextInputGroup
+                    label=""
+                    name="nic"
+                    placeholder=" NIC number"
+                    value={this.state.nic}
+                    onChange={this.onChangeNic}
+                    error={errors.nic}
+                  />{" "}{" "}{" "}
+             
+                  <select className="form-control"  value={this.state.course} onChange={this.onChangeCourse} error={errors.course}>
+                    <option value="it">IT</option>
+                    <option value="ds">SE</option>
+                    <option value="sepqm">CSN</option>
+                    <option value="sa">IS</option>
+                  </select>{" "}
+                
                   {/* <div className="form-group">
                                     <div className="form-check form-check-inline">
                                       <input
@@ -149,7 +190,7 @@ class StudentList extends Component {
                                       />
                                       <label className="form-check-label"> Year 03 </label>
                                     </div>
-                                  </div> */}{" "}
+                                  </div>{" "} */}
                   <div>
                     <button
                       class="btn waves-effect waves-light"
@@ -170,4 +211,4 @@ class StudentList extends Component {
   }
 }
 
-export default StudentList;
+export default StudentAdd;

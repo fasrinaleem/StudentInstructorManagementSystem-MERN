@@ -6,24 +6,30 @@ class StudentUpdate extends Component {
     super(props);
 
     this.onChangeStudentName = this.onChangeStudentName.bind(this);
-    this.onChangeInstructorName = this.onChangeInstructorName.bind(this);
-    //  this.onChangeYear = this.onChangeYear.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangeNic = this.onChangeNic.bind(this);
+    this.onChangeCourse = this.onChangeCourse.bind(this);
+  
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       studentName: "",
-      instructorName: ""
-      //     year: ""
+      email: "",
+      nic: "",
+      course: ""
+      
     };
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:4000/student/" + this.props.match.params.id)
+      .get("http://localhost:4000/api/student/" + this.props.match.params.id)
       .then(response => {
         this.setState({
           studentName: response.data.studentName,
-          instructorName: response.data.instructorName
+          email: response.data.email,
+          nic: response.data.nic,
+          course: response.data.course,
           //        year: response.data.year
         });
       })
@@ -38,29 +44,37 @@ class StudentUpdate extends Component {
     });
   }
 
-  onChangeInstructorName(e) {
+  onChangeEmail(e) {
     this.setState({
-      instructorName: e.target.value
+      email: e.target.value
     });
   }
 
-  // onChangeYear(e) {
-  //   this.setState({
-  //     year: e.target.value
-  //   });
-  // }
+  onChangeNic(e) {
+    this.setState({
+      nic: e.target.value
+    });
+  }
+
+  onChangeCourse(e) {
+    this.setState({
+      course: e.target.value
+    });
+  }
 
   onSubmit(e) {
     e.preventDefault();
     const updatedStudent = {
       studentName: this.state.studentName,
-      instructorName: this.state.instructorName
-      //      year: this.state.year
+      email: this.state.email,
+      nic: this.state.nic,
+      course: this.state.course,
+  
     };
 
     axios
       .post(
-        "http://localhost:4000/student/update/" + this.props.match.params.id,
+        "http://localhost:4000/api/student/update/" + this.props.match.params.id,
         updatedStudent
       )
       .then(res => console.log(res.data));
@@ -83,12 +97,30 @@ class StudentUpdate extends Component {
             />{" "}
           </div>{" "}
           <div className="form-group">
-            <label> Instructor Name </label>{" "}
+            <label> Email </label>{" "}
             <input
               type="text"
               className="form-control"
-              value={this.state.instructorName}
-              onChange={this.onChangeInstructorName}
+              value={this.state.email}
+              onChange={this.onChangeEmail}
+            />{" "}
+          </div>{" "}
+          <div className="form-group">
+            <label> NIC </label>{" "}
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.nic}
+              onChange={this.onChangeNic}
+            />{" "}
+          </div>{" "}
+          <div className="form-group">
+            <label> Course </label>{" "}
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.course}
+              onChange={this.onChangeCourse}
             />{" "}
           </div>{" "}
           <div className="form-group">
