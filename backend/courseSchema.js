@@ -19,7 +19,13 @@ let schemaCourse = new Schema({
   },
   duration: {
     type: String
-  }
+  },
+  instructorEmail: [
+    {
+      type: String,
+      ref: "instructor"
+    }
+  ]
 });
 
 module.exports = mongoose.model("course", schemaCourse);

@@ -12,6 +12,7 @@ class CourseAdd extends Component {
     this.onChangeStartDate = this.onChangeStartDate.bind(this);
     this.onChangeDuration = this.onChangeDuration.bind(this);
     this.onChangeInstructor = this.onChangeInstructor.bind(this);
+    this.onChangeInstructorEmail = this.onChangeInstructorEmail.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -21,7 +22,8 @@ class CourseAdd extends Component {
       duration: "",
       instructors: [],
       instructorsList: [],
-      errors: {}
+      errors: {},
+      instructoremail: []
     };
   }
 
@@ -62,6 +64,11 @@ class CourseAdd extends Component {
       instructors: e.target.value
     });
   }
+  onChangeInstructorEmail(e) {
+    this.setState({
+      instructoremail: e.target.value
+    });
+  }
 
   onSubmit(e) {
     e.preventDefault();
@@ -71,7 +78,8 @@ class CourseAdd extends Component {
       description,
       startDate,
       duration,
-      instructors
+      instructors,
+      instructoremail
     } = this.state;
 
     //Check for errors
@@ -95,6 +103,12 @@ class CourseAdd extends Component {
       this.setState({ errors: { instructors: "Instrutor is required" } });
       return;
     }
+    if (instructoremail === "") {
+      this.setState({
+        errors: { instructoremail: "Instrutor Email is required" }
+      });
+      return;
+    }
 
     console.log(`Form Submitted`);
     console.log(`Course Name : ${this.state.courseName}`);
@@ -102,13 +116,15 @@ class CourseAdd extends Component {
     console.log(`Start Date : ${this.state.startDate}`);
     console.log(`Duration : ${this.state.duration}`);
     console.log(`Instructor : ${this.state.instructors}`);
+    console.log(`Instructor Email: ${this.state.instructoremail}`);
 
     const newUser = {
       courseName: this.state.courseName,
       description: this.state.description,
       startDate: this.state.startDate,
       duration: this.state.duration,
-      instructorName: this.state.instructors
+      instructorName: this.state.instructors,
+      instructorEmail: this.state.instructoremail
     };
 
     axios.post("http://localhost:4000/api/course/add", newUser).then(res => {
@@ -122,7 +138,8 @@ class CourseAdd extends Component {
       description: "",
       startDate: "",
       duration: "",
-      instructors: ""
+      instructors: "",
+      instructoremail: ""
     });
   }
 
@@ -192,6 +209,26 @@ class CourseAdd extends Component {
                       return (
                         <option value={instructors.name} key={instructors._id}>
                           {instructors.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+
+                  <label> Instructor Email </label>
+                  <select
+                    className="form-control"
+                    id="instructoremail"
+                    name="instructoremail"
+                    onChange={this.onChangeInstructorEmail}
+                  >
+                    <option value="">------</option>
+                    {this.state.instructorsList.map(instructorEmail => {
+                      return (
+                        <option
+                          value={instructorEmail.mail}
+                          key={instructorEmail._id}
+                        >
+                          {instructorEmail.mail}
                         </option>
                       );
                     })}

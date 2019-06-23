@@ -1,6 +1,7 @@
 const express = require("express");
 const courseRoutes = express.Router();
 const courseModel = require("./courseSchema");
+const nodemailer = require("nodemailer");
 
 //Get all course details
 courseRoutes.route("/").get(function(req, res) {
@@ -31,8 +32,57 @@ courseRoutes.route("/add").post(function(req, res) {
     .catch(err => {
       res.status(400).send("Adding new course failed");
     });
-});
 
+  const output = `
+      <p> You have a new contact request</p>
+      <h3> Contact Details </h3>
+      <ul> 
+        <li> Course Name : ${req.body.courseName} </li>
+        <li> Course Description : ${req.body.description} </li>
+        <li> Duration : ${req.body.duration} </li>
+        <li> Instructor Name : ${req.body.instructorName} </li>
+        <li> Starting Date : ${req.body.startDate} </li>
+        <li> Instructor Email : ${req.body.instructorEmail} </li>
+      </ul>
+      <h3> Message </h3>
+      <p> ${req.body.message} </p>
+
+      `;
+
+  const email = req.body.instructorEmail;
+
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: "apinternationalpvtltd1@gmail.com", // generated ethereal user
+      pass: "0776740966" // generated ethereal password
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+
+  // setup email data with unicode symbols
+  let mailOptions = {
+    from: '"BRIGHTNERD 👻" <apinternationalpvtltd1@gmail.com>', // sender address
+    to: email, //"fasrinaleem@gmail.com" // list of receivers
+    subject: "New Course Request✔", // Subject line
+    text: "Hello world?", // plain text body
+    html: output // html body
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+
+    console.log("Message sent: %s", info.messageId);
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  });
+});
 //Update the course details
 courseRoutes.route("/update/:id").post(function(req, res) {
   courseModel.findById(req.params.id, function(err, coursemodel) {
