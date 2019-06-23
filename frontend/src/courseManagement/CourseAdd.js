@@ -23,7 +23,8 @@ class CourseAdd extends Component {
       instructors: [],
       instructorsList: [],
       errors: {},
-      instructoremail: []
+      instructoremail: [],
+      mobile: ""
     };
   }
 
@@ -69,6 +70,14 @@ class CourseAdd extends Component {
       instructoremail: e.target.value
     });
   }
+  handleMobileChange = e => {
+    let value = e.target.value;
+    if (value !== "") {
+      this.setState({ mobile: e.target.value });
+    } else {
+      this.setState({ mobile: "" });
+    }
+  };
 
   onSubmit(e) {
     e.preventDefault();
@@ -117,6 +126,7 @@ class CourseAdd extends Component {
     console.log(`Duration : ${this.state.duration}`);
     console.log(`Instructor : ${this.state.instructors}`);
     console.log(`Instructor Email: ${this.state.instructoremail}`);
+    console.log(`Instructor Number: ${this.state.mobile}`);
 
     const newUser = {
       courseName: this.state.courseName,
@@ -131,6 +141,23 @@ class CourseAdd extends Component {
       console.log(res.data);
       this.props.history.push(`/viewcourse`);
     });
+
+    let mob = this.state.mobile;
+    axios.post("http://localhost:4000/api/course/sendsms", {
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        to: mob
+      })
+    });
+    // .then(response => {
+    //   console.log("SMS : " + response);
+    //   return response.json();
+    // })
+    // .then(json => {
+    //   console.log("SMS has been sended to : " + json.to + " Successfuly");
+    // });
 
     // //Clear state after error checking(When click submit button)
     this.setState({
@@ -189,20 +216,13 @@ class CourseAdd extends Component {
                     onChange={this.onChangeStartDate}
                     error={errors.startDate}
                   />
-                  <TextInputGroup
-                    label="Duration"
-                    name="duration"
-                    placeholder=" Enter Duration"
-                    value={this.state.duration}
-                    onChange={this.onChangeDuration}
-                    error={errors.duration}
-                  />
-                  <label> Instructors </label>
+                  <label> Instructor Name </label>
                   <select
                     className="form-control"
                     id="instructors"
                     name="instructors"
                     onChange={this.onChangeInstructor}
+                    required
                   >
                     <option value="">------</option>
                     {this.state.instructorsList.map(instructors => {
@@ -214,12 +234,13 @@ class CourseAdd extends Component {
                     })}
                   </select>
 
-                  <label> Instructor Email </label>
+                  <label> Instructor's Email </label>
                   <select
                     className="form-control"
                     id="instructoremail"
                     name="instructoremail"
                     onChange={this.onChangeInstructorEmail}
+                    required
                   >
                     <option value="">------</option>
                     {this.state.instructorsList.map(instructorEmail => {
@@ -228,17 +249,32 @@ class CourseAdd extends Component {
                           value={instructorEmail.mail}
                           key={instructorEmail._id}
                         >
-                          {instructorEmail.mail}
+                          {instructorEmail.name} --> {instructorEmail.mail}
                         </option>
                       );
                     })}
                   </select>
+                  <TextInputGroup
+                    label="Duration"
+                    name="duration"
+                    placeholder=" Enter Duration"
+                    value={this.state.duration}
+                    onChange={this.onChangeDuration}
+                    error={errors.duration}
+                  />
+                  {/* <TextInputGroup
+                    label="Instructor Mobile Number"
+                    name="mobile"
+                    placeholder=" Enter Mobile Number"
+                    onChange={this.handleMobileChange}
+                  /> */}
 
                   <div>
                     <button
                       class="btn waves-effect waves-light"
                       type="submit"
                       name="action"
+                      style={{ backgroundColor: "#00ff00" }}
                     >
                       {" "}
                       Submit{" "}

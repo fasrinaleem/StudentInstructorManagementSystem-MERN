@@ -3,8 +3,9 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const courseRoutes = require("./courseRoutes");
+const courseRoutes = require("../backend/Course/CourseRoute/courseRoutes");
 const instructor = require("./InstructorRoute/instructor");
+const SMS = require("../backend/Course/SMSSender/SMSSender");
 //const courseRoutes = express.Router();
 const PORT = 4000;
 
@@ -21,6 +22,12 @@ mongoose
   .catch(err => {
     console.log(err.message);
   });
+
+//Sendin an SMS
+courseRoutes.route("/sendsms").post(cors(), (req, res) => {
+  SMS.sendSMS(req.body);
+  res.json(req.body);
+});
 
 //Middlewares
 app.use(cors());

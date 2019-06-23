@@ -24,9 +24,6 @@ export default class Header extends Component {
                 <li>
                   <Link to="/courses"> Courses </Link>
                 </li>
-                <li>
-                  <a href="/admin">Admin</a>
-                </li>
               </ul>
             </nav>
           </div>

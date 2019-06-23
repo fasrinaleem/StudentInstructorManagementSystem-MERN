@@ -8,6 +8,7 @@ const Course = props => (
     <td> {props.course.courseName} </td>
     <td> {props.course.description} </td>
     <td> {props.course.instructorName} </td>
+    <td> {props.course.instructorEmail} </td>
     <td> {props.course.startDate} </td>
     <td> {props.course.duration} </td>
   </tr>
@@ -63,6 +64,7 @@ class ViewCourse extends Component {
               <th> Course Name </th>
               <th> Description </th>
               <th> Instructor Name </th>
+              <th> Instructor Email </th>
               <th> Start Date </th>
               <th> Duration </th>
             </tr>

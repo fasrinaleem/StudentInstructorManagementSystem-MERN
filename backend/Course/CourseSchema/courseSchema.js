@@ -25,7 +25,10 @@ let schemaCourse = new Schema({
       type: String,
       ref: "instructor"
     }
-  ]
+  ],
+  mobileno: {
+    type: String
+  }
 });
 
 module.exports = mongoose.model("course", schemaCourse);
