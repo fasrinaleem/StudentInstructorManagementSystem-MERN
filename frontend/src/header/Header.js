@@ -27,13 +27,18 @@ export default class Header extends Component {
                 <li>
                   <a href="/admin">Admin</a>
                 </li>
-				                <li>
+                <li>
                   <Link to="/students"> Students </Link>{" "}
                 </li>{" "}
-
                 <li>
                   <Link to="/signup"> Sign Up </Link>{" "}
                 </li>{" "}
+                <li>
+                  <a href="/instructor">Instructor</a>
+                </li>
+                <li>
+                  <Link to="/instructorDashboard">Instructor Dashboard</Link>
+                </li>
               </ul>
             </nav>
           </div>

@@ -7,6 +7,8 @@ import Footer from "./footer/Footer";
 import Admin from "./adminManagement/Admin";
 import Students from "./studentManagement/Students";
 import StudentSignup from "./studentManagement/Signup/StudentSignup";
+import instructorHeader from "./instructorManagement/instructorHeader";
+import InstructorDashboard from "./instructorManagement/InstructorDashboard";
 
 class App extends Component {
   render() {
@@ -20,6 +22,11 @@ class App extends Component {
             <Route path="/admin" component={Admin} />
             <Route path="/students" component={Students} />{" "}
             <Route path="/signup" component={StudentSignup} />{" "}
+            <Route path="/instructor" component={instructorHeader} />
+            <Route
+              path="/instructorDashboard"
+              component={InstructorDashboard}
+            />
           </Switch>
           <Footer />
         </div>

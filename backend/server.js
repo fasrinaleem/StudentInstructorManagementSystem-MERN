@@ -7,6 +7,7 @@ const courseRoutes = require("./courseRoutes");
 const router = require("./adminRoutes");
 const studentRoutes = require("./studentRoutes");
 const instructor = require("./InstructorRoute/instructor");
+const assignment = require("./AssignmentRoute/assignment");
 //const courseRoutes = express.Router();
 const PORT = 4000;
 
@@ -39,6 +40,7 @@ app.use("/api/student", studentRoutes);
 
 //Instructor
 app.use("/api/instructor", instructor);
+app.use("/api/assignments", assignment);
 
 app.listen(PORT, function() {
   console.log("Server is running on port : " + PORT);
