@@ -25,12 +25,16 @@ router.get('/test', (req, res) => res.json({ msg: 'Posts Works' }));
 
 
 
-router.post('/', function (req, res) {
+router.post('/upload', function (req, res) {
 
     upload(req, res, function (err) {
-        if (err) {
+        if (err instanceof multer.MulterError) {
             // An error occurred when uploading
+            return res.status(500).json(err)
+        } else if (err) {
+        return res.status(500).json(err)
         }
+        
         res.json({
             success: true,
             message: 'Assignment uploaded!'

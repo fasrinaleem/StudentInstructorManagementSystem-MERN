@@ -3,12 +3,15 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const courseRoutes = require("./courseRoutes");
+// const router = require("./adminRoutes");
 const studentRoutes = require("./studentRoutes");
-const Posts = require("./posts");
-// const studentRoutes = express.Router();
+// const instructor = require("./InstructorRoute/instructor");
+// const assignment = require("./AssignmentRoute/assignment");
+//const courseRoutes = express.Router();
 const PORT = 4000;
 
-//const studentModel = require("./studentSchema");
+//const courseModel = require("./courseSchema");
 
 mongoose
   .connect(
@@ -22,17 +25,22 @@ mongoose
     console.log(err.message);
   });
 
-
-
 //Middlewares
 app.use(cors());
-app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
-//Middlewares
-app.use("/api/student", studentRoutes);
-app.use("/api/assignment", Posts);
+//MiddlewaresCourse
+app.use("/api/course", courseRoutes);
 
+//MiddlewaresAdmin
+//app.use("/api", router);
+
+//MiddlewaresStudent
+app.use("/api/student", studentRoutes);
+
+//Instructor
+// app.use("/api/instructor", instructor);
+// app.use("/api/assignments", assignment);
 
 app.listen(PORT, function() {
   console.log("Server is running on port : " + PORT);

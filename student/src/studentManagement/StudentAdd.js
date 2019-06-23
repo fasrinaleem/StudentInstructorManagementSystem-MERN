@@ -18,7 +18,8 @@ class StudentAdd extends Component {
       studentName: "",
       email: "",
       nic: "",
-      course: "",
+      course: [],
+      courseList: [],
       errors: {}
     };
   }
@@ -38,6 +39,18 @@ class StudentAdd extends Component {
       nic: e.target.value
     });
   }
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:4000/api/course/")
+      .then(response => {
+        this.setState({ courseList: response.data });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+} 
+
   onChangeCourse(e) {
     this.setState({
       course: e.target.value
@@ -63,6 +76,12 @@ class StudentAdd extends Component {
     if (nic === "") {
       this.setState({
         errors: { nic: "NIC number is required" }
+      });
+      return;
+    }
+    if (nic.length !== 10) {
+      this.setState({
+        errors: { nic: "NIC number is not correct" }
       });
       return;
     }
@@ -110,7 +129,7 @@ class StudentAdd extends Component {
           <div className="card mb-3" style={{ width: "700px" }}>
             <div style={{ width: "700px" }}>
               <div className="card-header">
-                <b> Add new Student </b>{" "}
+                <b> Student Registration</b>{" "}
               </div>{" "}
               <div className="card-header">
                 <b> Please enter full information and click submit</b>{" "}
@@ -146,12 +165,22 @@ class StudentAdd extends Component {
                     error={errors.nic}
                   />{" "}{" "}{" "}
              
-                  <select className="form-control"  value={this.state.course} onChange={this.onChangeCourse} error={errors.course}>
-                    <option value="it">IT</option>
-                    <option value="ds">SE</option>
-                    <option value="sepqm">CSN</option>
-                    <option value="sa">IS</option>
-                  </select>{" "}
+             <label> Courses </label>
+                  <select
+                    className="form-control"
+                    id="course"
+                    name="course"
+                    onChange={this.onChangeCourse}
+                  >
+                    <option value="">------</option>
+                    {this.state.courseList.map(course => {
+                      return (
+                        <option value={course.courseName} key={course.courseName}>
+                          {course.courseName}
+                        </option>
+                      );
+                    })}
+                  </select>
                 
                   {/* <div className="form-group">
                                     <div className="form-check form-check-inline">

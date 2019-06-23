@@ -27,7 +27,8 @@ studentRoutes.route("/").get(function(req, res) {
     student
       .save()
       .then(student => {
-        res.status(200).json({ student: "student added successfully" });
+        res.status(200).json({ student : "student added successfully" });
+        // alert("student added successfully" );
       })
       .catch(err => {
         res.status(400).send("Adding new student failed");

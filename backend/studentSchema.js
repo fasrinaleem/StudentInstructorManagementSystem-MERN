@@ -12,7 +12,8 @@ let schemaStudent = new Schema({
     type: String
   },
   course: {
-    type: String
+    type: String,
+    ref: "courses"
   }
 });
 
