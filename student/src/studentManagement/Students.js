@@ -7,6 +7,7 @@ import StudentUpdate from "./StudentUpdate";
 import StudentList from "./StudentList";
 import StudentDelete from "./StudentDelete";
 import StudentSignup from "./Signup/StudentSignup";
+import StudentDashboard from "./StudentDashboard";
 
 // import logo from "./resources/logo.png";
 
@@ -50,6 +51,7 @@ class Students extends Component {
           <Route path="/addstudent" component={StudentAdd} />
           <Route path="/delete/:id" component={StudentDelete} />
           <Route path="/studentsignup" component={StudentSignup} />
+          <Route path="/studentdashboard" component={StudentDashboard} />
         </div>
       </Router>
     );
