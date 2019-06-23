@@ -130,7 +130,15 @@ class CourseAdd extends Component {
     const { errors } = this.state;
 
     return (
-      <div style={{ marginTop: 20 }}>
+      <div style={{ marginTop: 10 }}>
+        <h3
+          style={{
+            color: "black"
+          }}
+        >
+          {" "}
+          Add New Course{" "}
+        </h3>
         <center>
           <div className="card mb-3" style={{ width: "700px" }}>
             <div style={{ width: "700px" }}>

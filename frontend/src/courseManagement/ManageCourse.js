@@ -74,11 +74,11 @@ class CourseList extends Component {
       <div>
         <h3
           style={{
-            color: "white"
+            color: "black"
           }}
         >
           {" "}
-          Courses{" "}
+          Manage Courses{" "}
         </h3>
         <table className="table table-striped" style={{ marginTop: 20 }}>
           <thead>

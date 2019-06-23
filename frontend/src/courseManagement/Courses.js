@@ -9,7 +9,6 @@ import CourseDelete from "./CourseDelete";
 import CourseManage from "./ManageCourse";
 import CourseView from "./ViewCourse";
 import CourseEntroll from "./CourseEntroll";
-import AddCourse from "./AddCourse";
 
 class Courses extends Component {
   render() {
@@ -31,11 +30,6 @@ class Courses extends Component {
 
             <div className="collapse navbar-collapse">
               <ul className="navbar-nav mr-auto">
-                {/* <li className="navbar-item">
-                  <Link to="/courseview" className="nav-link">
-                    View Courses
-                  </Link>
-                </li> */}
                 <li className="navbar-item">
                   <Link to="/viewcourse" className="nav-link">
                     View Courses
@@ -51,11 +45,6 @@ class Courses extends Component {
                     Manage Course
                   </Link>
                 </li>
-                <li className="navbar-item">
-                  <Link to="/addcourse2" className="nav-link">
-                    Add Course 2
-                  </Link>
-                </li>
               </ul>
             </div>
           </nav>
@@ -66,7 +55,6 @@ class Courses extends Component {
           <Route path="/managecourse" component={CourseManage} />
           <Route path="/courselist" component={CourseList} />
           <Route path="/courseentroll" component={CourseEntroll} />
-          <Route path="/addcourse2" component={AddCourse} />
         </div>
       </Router>
     );
