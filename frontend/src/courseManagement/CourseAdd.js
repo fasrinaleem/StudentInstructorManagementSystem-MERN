@@ -190,7 +190,7 @@ class CourseAdd extends Component {
                     <option value="">------</option>
                     {this.state.instructorsList.map(instructors => {
                       return (
-                        <option value={instructors._id} key={instructors._id}>
+                        <option value={instructors.name} key={instructors._id}>
                           {instructors.name}
                         </option>
                       );
