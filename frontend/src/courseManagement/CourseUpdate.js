@@ -17,7 +17,9 @@ class CourseUpdate extends Component {
       description: "",
       startDate: "",
       duration: "",
-      errors: {}
+      errors: {},
+      instructors: [],
+      instructorsList: []
     };
   }
 
@@ -75,12 +77,58 @@ class CourseUpdate extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+
+    const {
+      courseName,
+      description,
+      startDate,
+      duration,
+      instructors
+    } = this.state;
+
+    //Check for errors
+    if (courseName === "") {
+      this.setState({ errors: { courseName: "Course Name is required" } });
+      return;
+    }
+    if (description === "") {
+      this.setState({ errors: { description: "Description is required" } });
+      return;
+    }
+    if (startDate === "") {
+      this.setState({ errors: { startDate: "Starting Date is required" } });
+      return;
+    }
+    if (duration === "") {
+      this.setState({ errors: { duration: "Duration is required" } });
+      return;
+    }
+    if (instructors === "") {
+      this.setState({ errors: { instructors: "Instrutor is required" } });
+      return;
+    }
+
+    console.log(`Form Submitted`);
+    console.log(`Course Name : ${this.state.courseName}`);
+    console.log(`Description : ${this.state.description}`);
+    console.log(`Start Date : ${this.state.startDate}`);
+    console.log(`Duration : ${this.state.duration}`);
+    console.log(`Instructor : ${this.state.instructors}`);
+
+    const newUser = {
+      courseName: this.state.courseName,
+      description: this.state.description,
+      startDate: this.state.startDate,
+      duration: this.state.duration,
+      instructorName: this.state.instructors
+    };
+
     const updatedCourse = {
       courseName: this.state.courseName,
       description: this.state.description,
       startDate: this.state.startDate,
       duration: this.state.duration,
-      instructors: this.state.instructors
+      instructorName: this.state.instructors
     };
 
     axios
@@ -92,7 +140,6 @@ class CourseUpdate extends Component {
 
     this.props.history.push("/managecourse");
   }
-
   render() {
     return (
       <div>
@@ -134,6 +181,22 @@ class CourseUpdate extends Component {
               onChange={this.onChangeDuration}
             />
           </div>
+          <label> Instructors </label>
+          <select
+            className="form-control"
+            id="instructors"
+            name="instructors"
+            onChange={this.onChangeInstructor}
+          >
+            <option value="">------</option>
+            {this.state.instructorsList.map(instructors => {
+              return (
+                <option value={instructors.name} key={instructors._id}>
+                  {instructors.name}
+                </option>
+              );
+            })}
+          </select>
           <br />
 
           <div className="form-group">
