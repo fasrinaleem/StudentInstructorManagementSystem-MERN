@@ -3,7 +3,7 @@ import TextInputGroup from "./layout/TextInputGroup";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-class CourseAdd extends Component {
+class AddCourse extends Component {
   constructor(props) {
     super(props);
 
@@ -130,15 +130,7 @@ class CourseAdd extends Component {
     const { errors } = this.state;
 
     return (
-      <div style={{ marginTop: 10 }}>
-        <h3
-          style={{
-            color: "black"
-          }}
-        >
-          {" "}
-          Add New Course{" "}
-        </h3>
+      <div style={{ marginTop: 20 }}>
         <center>
           <div className="card mb-3" style={{ width: "700px" }}>
             <div style={{ width: "700px" }}>
@@ -232,4 +224,4 @@ class CourseAdd extends Component {
   }
 }
 
-export default CourseAdd;
+export default AddCourse;

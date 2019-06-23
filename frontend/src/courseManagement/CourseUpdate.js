@@ -6,14 +6,18 @@ class CourseUpdate extends Component {
     super(props);
 
     this.onChangeCourseName = this.onChangeCourseName.bind(this);
-    this.onChangeInstructorName = this.onChangeInstructorName.bind(this);
-    //  this.onChangeYear = this.onChangeYear.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeStartDate = this.onChangeStartDate.bind(this);
+    this.onChangeDuration = this.onChangeDuration.bind(this);
+    this.onChangeInstructor = this.onChangeInstructor.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       courseName: "",
-      instructorName: ""
-      //     year: ""
+      description: "",
+      startDate: "",
+      duration: "",
+      errors: {}
     };
   }
 
@@ -23,39 +27,60 @@ class CourseUpdate extends Component {
       .then(response => {
         this.setState({
           courseName: response.data.courseName,
-          instructorName: response.data.instructorName
-          //        year: response.data.year
+          description: response.data.description,
+          startDate: response.data.startDate,
+          duration: response.data.duration
         });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    axios
+      .get("http://localhost:4000/api/instructor/all")
+      .then(response => {
+        this.setState({ instructorsList: response.data });
       })
       .catch(function(error) {
         console.log(error);
       });
   }
 
+  //Setting State
   onChangeCourseName(e) {
     this.setState({
       courseName: e.target.value
     });
   }
-
-  onChangeInstructorName(e) {
+  onChangeDescription(e) {
     this.setState({
-      instructorName: e.target.value
+      description: e.target.value
     });
   }
-
-  // onChangeYear(e) {
-  //   this.setState({
-  //     year: e.target.value
-  //   });
-  // }
+  onChangeStartDate(e) {
+    this.setState({
+      startDate: e.target.value
+    });
+  }
+  onChangeDuration(e) {
+    this.setState({
+      duration: e.target.value
+    });
+  }
+  onChangeInstructor(e) {
+    this.setState({
+      instructors: e.target.value
+    });
+  }
 
   onSubmit(e) {
     e.preventDefault();
     const updatedCourse = {
       courseName: this.state.courseName,
-      instructorName: this.state.instructorName
-      //      year: this.state.year
+      description: this.state.description,
+      startDate: this.state.startDate,
+      duration: this.state.duration,
+      instructors: this.state.instructors
     };
 
     axios
@@ -65,7 +90,7 @@ class CourseUpdate extends Component {
       )
       .then(res => console.log(res.data));
 
-    this.props.history.push("/courselist");
+    this.props.history.push("/managecourse");
   }
 
   render() {
@@ -83,61 +108,40 @@ class CourseUpdate extends Component {
             />
           </div>
           <div className="form-group">
-            <label> Instructor Name </label>
+            <label> Description </label>
             <input
               type="text"
               className="form-control"
-              value={this.state.instructorName}
-              onChange={this.onChangeInstructorName}
+              value={this.state.description}
+              onChange={this.onChangeDescription}
             />
           </div>
           <div className="form-group">
-            {/* <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="year"
-                id="year1"
-                value="year1"
-                checked={this.state.year === "Year 01"}
-                onChange={this.onChangeYear}
-              />
-              <label className="form-check-label"> Year 01 </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="year"
-                id="year2"
-                value="year2"
-                checked={this.state.year === "Year 02"}
-                onChange={this.onChangeYear}
-              />
-              <label className="form-check-label"> Year 02 </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="year"
-                id="year3"
-                value="year3"
-                checked={this.state.year === "Year 03"}
-                onChange={this.onChangeYear}
-              />
-              <label className="form-check-label"> Year 03 </label>
-            </div> */}
+            <label> Start Date </label>
+            <input
+              type="date"
+              className="form-control"
+              value={this.state.startDate}
+              onChange={this.onChangeStartDate}
+            />
+          </div>
+          <div className="form-group">
+            <label> Duration </label>
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.duration}
+              onChange={this.onChangeDuration}
+            />
+          </div>
+          <br />
 
-            <br />
-
-            <div className="form-group">
-              <input
-                type="submit"
-                value="Update Course"
-                className="btn btn-primary"
-              />
-            </div>
+          <div className="form-group">
+            <input
+              type="submit"
+              value="Update Course"
+              className="btn btn-primary"
+            />
           </div>
         </form>
       </div>

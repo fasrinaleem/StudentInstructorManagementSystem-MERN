@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const courseRoutes = require("./courseRoutes");
 const router = require("./adminRoutes");
 const studentRoutes = require("./studentRoutes");
+const instructor = require("./InstructorRoute/instructor");
 //const courseRoutes = express.Router();
 const PORT = 4000;
 
@@ -35,6 +36,9 @@ app.use("/api", router);
 
 //MiddlewaresStudent
 app.use("/api/student", studentRoutes);
+
+//Instructor
+app.use("/api/instructor", instructor);
 
 app.listen(PORT, function() {
   console.log("Server is running on port : " + PORT);
