@@ -10,7 +10,7 @@ let schemaCourse = new Schema({
   },
   instructorName: [
     {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: "instructor"
     }
   ],
