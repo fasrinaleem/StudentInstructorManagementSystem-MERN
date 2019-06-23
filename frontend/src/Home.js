@@ -6,6 +6,10 @@ import courseimg from "./img/coursesimage.png";
 import studentimg from "./img/studentimage.jpg";
 import instructorimg from "./img/instructorimage.jpg";
 import adminimage from "./img/adminimage.jpg";
+import coursesbanner from "./img/courses-banner.jpg";
+
+import MainSignIn from "./signIn/MainSignIn";
+import Calendar from "./Calender";
 
 class Home extends Component {
   render() {
@@ -31,25 +35,21 @@ class Home extends Component {
               </form>
             </div>
           </section>
-
+          <div>
+            <div style={{ float: "right" }}>
+              <Calendar />
+            </div>
+            <div>
+              <img src={coursesbanner} width="980" />
+            </div>
+          </div>
           <section id="boxes">
             <div class="container">
-              <div class="box">
-                <img src={courseimg} width="500" />
+              {/* <div class="box">
+
                 <h3>
                   {" "}
-                  <Link to="/courses"> Courses </Link>
-                </h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vivamus mi augue, viverra sit amet ultricies
-                </p>
-              </div>
-              <div class="box">
-                <img src={studentimg} width="500" />
-                <h3>
-                  {" "}
-                  <Link to="/studentlist"> Student </Link>
+                  <Link to="/studentsignin"> Student </Link>
                 </h3>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -58,7 +58,10 @@ class Home extends Component {
               </div>
               <div class="box">
                 <img src={instructorimg} width="500" />
-                <h3>Instructor</h3>
+                <h3>
+                  {" "}
+                  <Link to="/instructorcoursesignin"> Instructor </Link>
+                </h3>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Vivamus mi augue, viverra sit amet ultricies
@@ -66,12 +69,15 @@ class Home extends Component {
               </div>
               <div class="box">
                 <img src={adminimage} width="500" />
-                <h3>Admin</h3>
+                <h3>
+                  {" "}
+                  <Link to="/adminsignin"> Admin </Link>
+                </h3>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Vivamus mi augue, viverra sit amet ultricies
                 </p>
-              </div>
+              </div> */}
             </div>
           </section>
         </div>

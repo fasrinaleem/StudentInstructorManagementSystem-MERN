@@ -9,13 +9,20 @@ import Students from "./studentManagement/Students";
 import StudentSignup from "./studentManagement/Signup/StudentSignup";
 import instructorHeader from "./instructorManagement/instructorHeader";
 import InstructorDashboard from "./instructorManagement/InstructorDashboard";
+import MainSignIn from "./signIn/MainSignIn";
+import MainHeader from "./header/MainHeader";
+import StudentSignIn from "./signIn/StudentSignIn";
+import InstructorSignIn from "./signIn/InstructorSignIn";
+import AdminSignIn from "./signIn/AdminSignIn";
+import CourseSignIn from "./signIn/CourseSignIn";
+import InstructorCourseSignIn from "./signIn/InstructorCourseSignIn";
 
 class App extends Component {
   render() {
     return (
       <Router>
         <div>
-          <Header />
+          <MainHeader />
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/courses" component={Courses} />
@@ -23,9 +30,18 @@ class App extends Component {
             <Route path="/students" component={Students} />{" "}
             <Route path="/signup" component={StudentSignup} />{" "}
             <Route path="/instructor" component={instructorHeader} />
+            <Route path="/mainsignin" component={MainSignIn} />
             <Route
               path="/instructorDashboard"
               component={InstructorDashboard}
+            />
+            <Route path="/studentsignin" component={StudentSignIn} />
+            <Route path="/adminsignin" component={AdminSignIn} />
+            <Route path="/instructorsignin" component={InstructorSignIn} />
+            <Route path="/coursesignin" component={CourseSignIn} />
+            <Route
+              path="/instructorcoursesignin"
+              component={InstructorCourseSignIn}
             />
           </Switch>
           <Footer />
