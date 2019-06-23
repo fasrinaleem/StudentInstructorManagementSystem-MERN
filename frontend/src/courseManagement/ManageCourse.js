@@ -85,7 +85,7 @@ class CourseList extends Component {
             <tr>
               <th> Course Name </th>
               <th> Description </th>
-              <th> Instructor Name </th>
+              <th> Instructor ID </th>
               <th> Start Date </th>
               <th> Duration </th>
               <th> Actions </th>

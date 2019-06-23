@@ -3,7 +3,7 @@ import TextInputGroup from "./layout/TextInputGroup";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-class CourseAdd extends Component {
+class AddCourse extends Component {
   constructor(props) {
     super(props);
 
@@ -224,4 +224,4 @@ class CourseAdd extends Component {
   }
 }
 
-export default CourseAdd;
+export default AddCourse;
