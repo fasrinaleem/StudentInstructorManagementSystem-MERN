@@ -22,13 +22,14 @@ class Admindelete extends Component{
             "http://localhost:4000/api/admin/delete/" + this.props.match.params.id
         );
     
-       // this.props.history.push("/courselist");
+
+       this.props.history.push('/adminview');
       }
 
   render() {
       return(
         <div>
-        <h1> Course has been deleted </h1>
+        <h1> Admin deleted successfully </h1>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <input

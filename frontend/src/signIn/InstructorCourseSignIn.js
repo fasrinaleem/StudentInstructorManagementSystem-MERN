@@ -14,7 +14,7 @@ export default class InstructorCourseSignIn extends Component {
               <img src={courseimg} width="500" />
               <h3>
                 {" "}
-                <Link to="/coursesignin"> Courses </Link>
+                <Link to="/courses"> Courses </Link>
               </h3>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus

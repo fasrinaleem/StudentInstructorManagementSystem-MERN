@@ -5,102 +5,78 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 class AdminAdd  extends Component{
 
-    constructor(props) {
+   constructor(props) {
+    super(props);
 
-        super(props);
-    
-        this.handlechangename = this.handlechangename.bind(this);
-        this.handlechangemail = this.handlechangemail.bind(this);
-        this.handlechangecontactNumber = this.handlechangecontactNumber.bind(this);
-        this.handlechangepassword = this.handlechangepassword.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    
-    
-        this.state = {
-          name:" ",
-          mail:" ",
-          contactNumber:" ",
-          password: " ", 
-          errors:{}
-            }
-        }
-     
-       
-    
-        handlechangename = e =>{
-            this.setState({
-                name: e.target.value
-            })
-      
-        }
-    
-        handlechangemail = e =>{
-          // e.preventDefault();
-           this.setState({
-               mail : e.target.value
-           })
-     
-       }
-    
-       handlechangecontactNumber = e =>{
-        // e.preventDefault();
-         this.setState({
-            contactNumber: e.target.value
-         })
-    
-     }
-    
-     handlechangepassword = e => {
-      // e.preventDefault();
-       this.setState({
-        password: e.target.value
-       })
-
-
-    //    handlechangepassword  = e => {
-    //     // e.preventDefault();
-    //      this.setState({
-    //       password: e.target.value
-    //      })
-    
+    this.state={
+       adminID:'',
+        name:'',
+        email:'',
+        password:''
     }
-    
-    
-         handleSubmit = e => {
-            e.preventDefault();
-           
-    
-           console.log(`Form submitted:`);
-           console.log(`Todo Description: ${this.state.name}`);
-           console.log(`Todo Responsible: ${this.state.mail}`);
-           console.log(`Todo Priority: ${this.state.contactNumber}`);
-           console.log(`Todo Priority: ${this.state.password}`);
-    
-          const newData = {
-               name : this.state.name,
-               mail : this.state.mail,
-               contactNumber: this.state.contactNumber,
-               password:this.state.password
 
-          };
-    
-           axios.post("http://localhost:4000/api/admin/add", newData)
-           .then(res => {
-               console.log(res.data)
-           })
-    
-           //this.props.history.push('/admin/edit');
-    
-           this.setState({
-              name: " ",
-              mail: " ",
-              contactNumber: " ",
-              password: ""
-        })
-    
-        }
+    this.onSubmit=this.onSubmit.bind(this);
+    this.onChangeID=this.onChangeID.bind(this);
+    this.onChangeName=this.onChangeName.bind(this);
+    this.onChangeEmail=this.onChangeEmail.bind(this);
+    this.onChangePassword=this.onChangePassword.bind(this);
 
+
+}
+    
+onChangeID(e){
+  this.setState({
+      adminID:e.target.value,
+  });
+}
+
+onChangeName(e){
+  this.setState({
+      name:e.target.value,
+  });
+}
+
+onChangeEmail(e){
+  this.setState({
+      email:e.target.value,
+  });
+}
+onChangePassword(e){
+  this.setState({
+      password:e.target.value,
+  });
+}
+
+onSubmit(e){
+  e.preventDefault();
+
+  const newData ={
+      adminID:this.state.adminID,
+      name:this.state.name,
+      email:this.state.email,
+      password:this.state.password
+  }
+
+  axios.post("http://localhost:4000/api/admin/add", newData)
+  .then(res => {
+      console.log(res.data)
+  })
+
+  this.props.history.push('/adminview');
+
+  this.setState({
+      adminID:'',
+      name:'',
+      email:'',
+      password:''
+  })
+
+}
+    
+    
     render(){
+     
+
       return(
         <div style={{ marginTop: 20 }}>
         <center>
@@ -110,54 +86,55 @@ class AdminAdd  extends Component{
                 <b> Add New Admin </b>
               </div>
               <div className="çard-body">
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.onSubmit}>
 
-                  <TextInputGroup
-                    label="Admin Name"
-                    name="name"
-                    placeholder=" Enter Admin Name"
-                    value={this.state.name}
-                    onChange={this.handlechangename }
-                   // error={errors.courseName}
-                  />
-                  <TextInputGroup
-                    label="Admin Email"
-                    name="mail"
-                    placeholder=" Enter Admin mail"
-                    value={this.state.mail }
-                    onChange={this.handlechangemail }
-                   // error={errors.instructorName}
-                  />
-                 
-                  <TextInputGroup
-                  label="Admin Contact Number"
-                  name="contactNumber"
-                  placeholder=" Enter Contact Number"
-                  value={this.state.contactNumber}
-                  onChange={this. handlechangecontactNumber }
-                  //error={errors.instructorName}
-                />
-
-
+                
                 <TextInputGroup
-                label=" Enter Password"
-                name="password"
-                placeholder=" Enter the password"
-                value={this.state.password}
-                onChange={this.handlechangepassword}
-                //error={errors.instructorName}
+                label="Admin id"
+                name="adminID"
+                placeholder=" Enter Admin id"
+                value={this.state.adminID}
+                onChange={this.onChangeID}
+                //error={errors.name}
               />
 
+              <TextInputGroup
+              label="Admin name"
+              name="name"
+              placeholder=" Enter Admin name"
+              value={this.state.name}
+              onChange={this.onChangeName}
+              //error={errors.name}
+            />
 
-                  <div>
+
+            <TextInputGroup
+            label="Admin mail"
+            name="email"
+            placeholder=" Enter Admin mail"
+            value={this.state.email}
+             onChange={this.onChangeEmail}
+            //error={errors.name}
+          />
+
+          <TextInputGroup
+          label="Admin password"
+          name="password"
+          type="password"
+          placeholder=" Enter Admin password"
+          value={this.state.password}
+          onChange={this.onChangePassword}
+          //error={errors.name}
+        />
+                 
                     <button
-                      class="btn waves-effect waves-light"
-                      type="submit"
+                    className="btn btn-primary"
+                    type="submit"
                       name="action"
                     >
                           Submit
                     </button>
-                  </div>
+               
                 </form>
               </div>
             </div>
@@ -166,6 +143,6 @@ class AdminAdd  extends Component{
       </div>
       )
     }
-}
+  }
 
 export default AdminAdd;

@@ -40,7 +40,9 @@ TextInputGroup.propTypes = {
 };
 
 TextInputGroup.defaultProps = {
-  type: "text"
+  type: "text",
+  type: "password",
+  type: "mail"
 };
 
 export default TextInputGroup;

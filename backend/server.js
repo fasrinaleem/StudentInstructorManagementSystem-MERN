@@ -4,11 +4,12 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const courseRoutes = require("./Course/CourseRoute/courseRoutes");
-const router = require("./adminRoutes");
+const router = require("./Admin/AdminRoutes/adminRoutes");
 const studentRoutes = require("./studentRoutes");
 const instructor = require("./InstructorRoute/instructor");
 const assignment = require("./AssignmentRoute/assignment");
 const SMS = require("../backend/Course/SMSSender/SMSSender");
+const instLogrouter = require("./login/instLogRoute");
 //const courseRoutes = express.Router();
 const PORT = 4000;
 
@@ -48,6 +49,9 @@ app.use("/api/student", studentRoutes);
 //Instructor
 app.use("/api/instructor", instructor);
 app.use("/api/assignments", assignment);
+
+//Middlewre instructor login
+app.use("/api", instLogrouter);
 
 app.listen(PORT, function() {
   console.log("Server is running on port : " + PORT);

@@ -4,33 +4,11 @@ import { Link, BrowserRouter, Route } from "react-router-dom";
 
 const Admin = props => (
   <tr>
+   <td>{props.admin.adminID}</td>
     <td>{props.admin.name}</td>
-    <td>{props.admin.mail}</td>
-    <td>{props.admin.contactNumber}</td>
+    <td>{props.admin.email}</td>
     <td>{props.admin.password}</td>
 
-    <td>
-      <Link
-        to={"/admin/edit/" + props.admin._id}
-        style={{
-          backgroundColor: "#82f441",
-          color: "blue"
-        }}
-      >
-        {" "}
-        Edit{" "}
-      </Link>
-      <Link
-        to={"/admin/delete/" + props.admin._id}
-        style={{
-          backgroundColor: "#82f441",
-          color: "blue"
-        }}
-      >
-        {" "}
-        Delete{" "}
-      </Link>
-    </td>
   </tr>
 );
 
@@ -50,6 +28,18 @@ class AdminView extends Component {
       .catch(function(error) {
         console.log(error);
       });
+  }
+
+  componentDidUpdate(){
+    axios
+    .get("http://localhost:4000/api/admin/edit")
+    .then(response => {
+      this.setState({ admins: response.data });
+      console.log(response.data);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
   }
 
   //   componentDidUpdate(){
@@ -76,14 +66,14 @@ class AdminView extends Component {
             color: "white"
           }}
         />
-        <table className="table table-striped" style={{ marginTop: 20 }}>
+        <table className="table table-striped" style={{ marginTop: 20,marginLeft:"5px",marginRight:"10px"}}>
           <thead>
             <tr>
-              <th> Name </th>
-              <th> mail </th>
-              <th> phone number </th>
+              <th> Admin ID </th>
+              <th> Admin Name  </th>
+              <th> Mail </th>
               <th> password</th>
-              <th> Actions</th>
+             
             </tr>
           </thead>
           <tbody>{this.adminList()}</tbody>

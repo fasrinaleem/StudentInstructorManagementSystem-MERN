@@ -1,101 +1,117 @@
-import React , {Component} from "react"
-import axios from "axios"
+import React, { Component } from "react";
+import axios from "axios";
 
-class AdminUpdate  extends Component{ 
+class AdminUpdate extends Component {
+  constructor(props) {
+    super(props);
 
-    constructor(props) {
+    this.handlechangename = this.handlechangename.bind(this);
+    this.handlechangemail = this.handlechangemail.bind(this);
+    this.handlechangeadminId = this.handlechangeadminId.bind(this);
+    //this.handlechangecontactNumber = this.handlechangecontactNumber.bind(this);
+    this.handlechangepassword = this.handlechangepassword.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
-        super(props);
-    
-        this.handlechangename = this.handlechangename.bind(this);
-        this.handlechangemail = this.handlechangemail.bind(this);
-        this.handlechangecontactNumber = this.handlechangecontactNumber.bind(this);
-        this.handlechangepassword = this.handlechangepassword.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    
-    
-        this.state = {
-          name:" ",
-          mail:" ",
-          contactNumber:" ",
-          password: " " 
-            }
-        }
-    
-    
-        componentDidMount() {
-          axios.get("http://localhost:4000/api/admin/edit/"+this.props.match.params.id)
-              .then(response => {
-                  this.setState({
-                      name: response.data.name,
-                      mail: response.data.mail,
-                      contactNumber: response.data.contactNumber,
-                      password: response.data.password
-                  })   
-              })
-              .catch(function (error) {
-                  console.log(error);
-              })
-      }
-    
-      handlechangename = e =>{
-        // e.preventDefault();
-         this.setState({
-             name: e.target.value
-         })
-    
-     }
-    
-     handlechangemail = e =>{
-       // e.preventDefault();
+    this.state = {
+      adminID: "",
+      name: "",
+      email: "",
+      password: ""
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:4000/api/admin/edit/" + this.props.match.params.id)
+      .then(response => {
         this.setState({
-            mail : e.target.value
-        })
-    
-    }
-    
-    handlechangecontactNumber = e =>{
-     // e.preventDefault();
-      this.setState({
-        contactNumber: e.target.value
+          adminID: response.data.adminID,
+          name: response.data.name,
+          email: response.data.email,
+          password: response.data.password
+        });
       })
-    
-    }
-    
-    handlechangepassword = e => {
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
+  handlechangeadminId = e => {
     // e.preventDefault();
     this.setState({
-        password: e.target.value
-    })
-    
-    }
-    
-    handleSubmit = e => { 
-      e.preventDefault();
-      const obj = {
-          name: this.state.name,
-          mail: this.state.mail,
-          contactNumber: this.state.contactNumber,
-          password: this.state.password
-      };
-      console.log(obj);
-      axios.post("http://localhost:4000/api/admin/update/"+this.props.match.params.id, obj)
-          .then(res => console.log(res.data));
-      
-      this.props.history.push('/admin/edit');
-    }
-    
-    //  handlecancel = e => {
-    //    e.preventDefault();
-    //    this.props.history.push('/admin/edit');
-    //  }
-    
+      adminID: e.target.value
+    });
+  };
 
-    render(){
-      return( 
-        <div>
+  handlechangename = e => {
+    // e.preventDefault();
+    this.setState({
+      name: e.target.value
+    });
+  };
+
+  handlechangemail = e => {
+    // e.preventDefault();
+    this.setState({
+      email: e.target.value
+    });
+  };
+
+  // handlechangecontactNumber = e =>{
+  //  // e.preventDefault();
+  //   this.setState({
+  //     contactNumber: e.target.value
+  //   })
+
+  // }
+
+  handlechangepassword = e => {
+    // e.preventDefault();
+    this.setState({
+      password: e.target.value
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const obj = {
+      adminID: this.state.adminID,
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password
+    };
+    console.log(obj);
+    axios
+      .post(
+        "http://localhost:4000/api/admin/update/" + this.props.match.params.id,
+        obj
+      )
+      .then(res => console.log(res.data));
+
+    // this.props.history.push('/admin/edit');
+
+    this.props.history.push("/adminview");
+  };
+
+  //  handlecancel = e => {
+  //    e.preventDefault();
+  //    this.props.history.push('/admin/edit');
+  //  }
+
+  render() {
+    return (
+      <div>
         <h3> Update Admin </h3>
         <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <label> Admin Name </label>
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.adminID}
+              onChange={this.handlechangeadminId}
+            />
+          </div>
 
           <div className="form-group">
             <label> Admin Name </label>
@@ -103,7 +119,7 @@ class AdminUpdate  extends Component{
               type="text"
               className="form-control"
               value={this.state.name}
-              onChange={this.handlechangename }
+              onChange={this.handlechangename}
             />
           </div>
 
@@ -112,31 +128,20 @@ class AdminUpdate  extends Component{
             <input
               type="text"
               className="form-control"
-              value={this.state.mail }
-              onChange={this.handlechangemail }
+              value={this.state.email}
+              onChange={this.handlechangemail}
             />
           </div>
 
           <div className="form-group">
-          <label> Admin Contact No: </label>
-          <input
-            type="text"
-            className="form-control"
-            value={this.state.contactNumber}
-            onChange={this.handlechangecontactNumber }
-          />
-        </div>
-
-        <div className="form-group">
-        <label> Admin password </label>
-        <input
-          type="text"
-          className="form-control"
-          value={this.state.password}
-          onChange={this.handlechangepassword}
-        />
-      </div>
-
+            <label> Admin password </label>
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.password}
+              onChange={this.handlechangepassword}
+            />
+          </div>
 
           <div className="form-group">
             {/* <div className="form-check form-check-inline">
@@ -188,8 +193,8 @@ class AdminUpdate  extends Component{
           </div>
         </form>
       </div>
-      )
-    }
+    );
+  }
 }
 
 export default AdminUpdate;
