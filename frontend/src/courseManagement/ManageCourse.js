@@ -8,7 +8,8 @@ const Course = props => (
     <td> {props.course.courseName} </td>
     <td> {props.course.description} </td>
     <td> {props.course.instructorName} </td>
-    <td> {props.course.startDate} </td>
+    <td> {props.course.instructorEmail} </td>
+    {/* <td> {props.course.startDate} </td> */}
     <td> {props.course.duration} </td>
     <td>
       <Link
@@ -86,7 +87,8 @@ class CourseList extends Component {
               <th> Course Name </th>
               <th> Description </th>
               <th> Instructor Name </th>
-              <th> Start Date </th>
+              <th> Instructor Email </th>
+              {/* <th> Start Date </th> */}
               <th> Duration </th>
               <th> Actions </th>
             </tr>

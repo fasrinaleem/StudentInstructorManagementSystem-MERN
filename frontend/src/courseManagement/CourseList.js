@@ -41,9 +41,18 @@ class CourseList extends Component {
           key={currentCourse.id}
           style={{ marginBottom: "20px", marginTop: "20px" }}
         >
-          <div className="card-header">{currentCourse.courseName}</div>
+          <div className="card-header" style={{ fontSize: "20px" }}>
+            <b>{currentCourse.courseName}</b>
+          </div>
           <div className="card-body"> {currentCourse.description}</div>
-          <div className="card-body"> {currentCourse.duration}</div>
+          <div className="card-body">
+            {" "}
+            <b>Duration : </b> {currentCourse.duration}
+          </div>
+          <div className="card-body">
+            {" "}
+            <b> Starting Date : </b> {currentCourse.startDate}
+          </div>
           <div className="card-footer">
             <Link
               to={"/viewcourse/"}
