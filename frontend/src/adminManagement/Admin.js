@@ -11,6 +11,8 @@ import InstructorList from "../instructorManagement/InstructorList";
 import Students from "../studentManagement/Students";
 import addInstructor from "../instructorManagement/addInstructor";
 import Courses from "../courseManagement/Courses";
+import instructorUpdate from "../instructorManagement/InstructorUpdate";
+import instructorHeader from "../instructorManagement/instructorHeader";
 
 class Admin extends Component {
   render() {
@@ -55,7 +57,7 @@ class Admin extends Component {
                   </li>
 
                   <li className="navbar-item">
-                    <Link to="/instructorList" className="nav-link">
+                    <Link to="/instructorheader" className="nav-link">
                       Manage Instructors
                     </Link>
                   </li>
@@ -83,6 +85,8 @@ class Admin extends Component {
             <Route path="/instructorList" component={InstructorList} />
             <Route path="/addinstructor" component={addInstructor} />
             <Route path="/courses" component={Courses} />
+            <Route path="/edit/:id" component={instructorUpdate} />
+            <Route path="/instructorheader" component={instructorHeader} />
           </div>
         </Router>
       </div>

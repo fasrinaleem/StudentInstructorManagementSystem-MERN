@@ -16,7 +16,7 @@ export default class MainSignIn extends Component {
         <section id="boxes">
           <div class="container">
             <div class="box">
-              <img src={studentimg} width="500" />
+              <img src={studentdashboard} width="500" />
               <h3>
                 {" "}
                 <Link to="/studentsignin"> Student </Link>
@@ -26,15 +26,7 @@ export default class MainSignIn extends Component {
               <img src={instructorimg} width="500" />
               <h3>
                 {" "}
-                <Link to="/instructordashboard"> Instructor Dashboard </Link>
-              </h3>
-            </div>
-
-            <div class="box">
-              <img src={studentdashboard} width="500" />
-              <h3>
-                {" "}
-                <Link to="/studentdashbord"> Student Dashboard </Link>
+                <Link to="/instructorsignin"> Instructor </Link>
               </h3>
             </div>
 

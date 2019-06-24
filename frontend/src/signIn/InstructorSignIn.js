@@ -13,15 +13,14 @@ class InstructorSignIn extends Component {
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
-      adminID: "",
-      email: "",
+      instructorID: "",
       password: "",
       userType: ""
     };
   }
   onChangeID = e => {
     this.setState({
-      adminID: e.target.value
+      instructorID: e.target.value
     });
   };
 
@@ -40,24 +39,24 @@ class InstructorSignIn extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const new_admin = {
-      adminID: this.state.adminID,
+    const new_Instructor = {
+      instructorID: this.state.instructorID,
       password: this.state.password
     };
 
-    if (!new_admin.adminID) {
+    if (!new_Instructor.instructorID) {
       alert("Enter Admin ID");
-    } else if (!new_admin.password) {
+    } else if (!new_Instructor.password) {
       alert("Enter Password");
-    } else if (!new_admin.adminID && !new_admin.password) {
+    } else if (!new_Instructor.instructorID && !new_Instructor.password) {
       alert("Enter Admin Credentials");
     } else {
       axios
-        .post("http://localhost:4000/api/admin/login", new_admin)
+        .post("http://localhost:4000/api/instructor/login", new_Instructor)
         .then(res => {
           if (res.status === 200) {
-            alert("Login Success! Welcome, " + this.state.adminID);
-            this.props.history.push("/admin");
+            alert("Login Success! Welcome, " + this.state.instructorID);
+            this.props.history.push("/instructordashboard");
           } else {
             alert("Login Failed! Please try again!");
           }
@@ -68,7 +67,7 @@ class InstructorSignIn extends Component {
   render() {
     return (
       <div>
-        <h2 align="center">ADMIN LOGIN</h2> <br />
+        <h2 align="center">Instructor LOGIN</h2> <br />
         <div>
           <form onSubmit={this.onSubmit}>
             <div className="form-group col-7">
@@ -78,7 +77,7 @@ class InstructorSignIn extends Component {
               <input
                 type="text"
                 className="form-control"
-                id="adminID"
+                id="instructorID"
                 aria-describedby="emailHelp"
                 value={this.state.adminID}
                 onChange={this.onChangeID}

@@ -9,6 +9,7 @@ import CourseDelete from "./CourseDelete";
 import CourseManage from "./ManageCourse";
 import CourseView from "./ViewCourse";
 import CourseEntroll from "./CourseEntroll";
+import LinkAssignment from "../studentManagement/LinkAssignment";
 
 class Courses extends Component {
   render() {
@@ -55,6 +56,7 @@ class Courses extends Component {
           <Route path="/managecourse" component={CourseManage} />
           <Route path="/courselist" component={CourseList} />
           <Route path="/courseentroll" component={CourseEntroll} />
+          <Route path="/assignmentlink" component={LinkAssignment} />
         </div>
       </Router>
     );
