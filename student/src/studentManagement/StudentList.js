@@ -6,7 +6,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Student = props => (
   <tr>
     <td> {props.student.studentName} </td> 
+    <td> {props.student.studentID} </td> 
     <td> {props.student.email} </td>{" "}
+    <td> {props.student.password} </td> 
     <td> {props.student.nic} </td> 
     <td> {props.student.course} </td>{" "}
     <td>
@@ -68,8 +70,11 @@ class StudentList extends Component {
           <thead>
             <tr>
               <th> student Name </th>
+              <th> student ID </th>
               <th> Email </th>
-              <th> NIC number </th> <th> Course </th>{" "}
+              <th> Password </th>
+              <th> NIC number </th>
+              <th> Course </th>{" "}
             </tr>{" "}
           </thead>{" "}
           <tbody> {this.studentList()} </tbody>{" "}
