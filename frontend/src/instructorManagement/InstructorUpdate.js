@@ -16,7 +16,7 @@ class instructorUpdate extends Component {
         this.state = {
             name: "",
             mail: "",
-            contactNumber: "",
+            contactNumber:'',
             dept: "",
             title: "",
             password: "",
@@ -93,7 +93,7 @@ class instructorUpdate extends Component {
             )
             .then(res => console.log(res.data));
 
-        this.props.history.push("/");
+        this.props.history.push("/instructorList");
     }
 
     render() {
@@ -108,25 +108,25 @@ class instructorUpdate extends Component {
                             className="form-control"
                             value={this.state.name}
                             onChange={this.onChangeName}
-                        />
+                        required/>
                     </div>
                     <div className="form-group">
                         <label> Instructor Email </label>
                         <input
-                            type="text"
+                            type="email"
                             className="form-control"
                             value={this.state.mail}
                             onChange={this.onChangeMail}
-                        />
+                        required/>
                     </div>
                     <div className="form-group">
                         <label> Instructor Number </label>
                         <input
-                            type="text"
+                            type="number"
                             className="form-control"
                             value={this.state.contactNumber}
                             onChange={this.onChangeContact}
-                        />
+                        required/>
                     </div>
                     <div className="form-group">
                         <label> Instructor Dept </label>
@@ -144,16 +144,16 @@ class instructorUpdate extends Component {
                             className="form-control"
                             value={this.state.title}
                             onChange={this.onChangeTitle}
-                        />
+                        required/>
                     </div>
                     <div className="form-group">
-                        <label> Instructor Name </label>
+                        <label> Instructor Password </label>
                         <input
                             type="text"
                             className="form-control"
                             value={this.state.password}
                             onChange={this.onChangePassword}
-                        />
+                        required/>
                     </div>
                     <div className="form-group">
 

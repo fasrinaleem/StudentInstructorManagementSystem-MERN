@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class DeleteInstructor extends Component {
+class DeleteAssignment extends Component {
     constructor(props) {
         super(props);
 
@@ -10,7 +10,7 @@ class DeleteInstructor extends Component {
 
     componentDidMount() {
         axios
-            .delete("http://localhost:4000/api/instructor/delete/" + this.props.match.params.id)
+            .delete("http://localhost:4000/api/assignments/delete/" + this.props.match.params.id)
             .then(response => {})
             .catch(function(error) {
                 console.log(error);
@@ -20,20 +20,20 @@ class DeleteInstructor extends Component {
     onSubmit(e) {
         e.preventDefault();
         axios.delete(
-            "http://localhost:4000/api/instructor/delete/" + this.props.match.params.id
+            "http://localhost:4000/api/assignments/delete/" + this.props.match.params.id
         );
 
-        this.props.history.push("/instructorList");
+        this.props.history.push("/viewAssignments");
     }
     render() {
         return (
             <div>
-                <h1> Instructor has been deleted </h1>
+                <h1> Assignment has been deleted </h1>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <input
                             type="submit"
-                            value="Back to Courses"
+                            value="Back to Assignments"
                             className="btn btn-primary"
                         />
                     </div>
@@ -43,4 +43,4 @@ class DeleteInstructor extends Component {
     }
 }
 
-export default DeleteInstructor;
+export default DeleteAssignment;

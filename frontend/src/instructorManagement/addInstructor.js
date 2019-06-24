@@ -101,6 +101,8 @@ class addInstructor extends Component {
             .post("http://localhost:4000/api/instructor/add", newUser)
             .then(res => console.log(res.data));
 
+        this.props.history.push("/instructorList");
+
         // //Clear state after error checking(When click submit button)
         this.setState({
             name: "",
@@ -140,6 +142,7 @@ class addInstructor extends Component {
                                     <TextInputGroup
                                         label="Email Name"
                                         name="mail"
+                                        type="email"
                                         placeholder=" Enter Instructor Email"
                                         value={this.state.mail}
                                         onChange={this.onChangeMail}
@@ -148,6 +151,7 @@ class addInstructor extends Component {
                                     <TextInputGroup
                                         label="contact Number"
                                         name="contactNumber"
+                                        type="number"
                                         placeholder=" Enter Instructor Number"
                                         value={this.state.contactNumber}
                                         onChange={this.onChangeContact}
@@ -177,44 +181,6 @@ class addInstructor extends Component {
                                         onChange={this.onChangePassword}
                                         error={errors.password}
                                     />
-                                    {/* <div className="form-group">
-                    <div className="form-check form-check-inline">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="year"
-                        id="year1"
-                        value="year1"
-                        checked={this.state.year === "Year 01"}
-                        onChange={this.onChangeYear}
-                      />
-                      <label className="form-check-label"> Year 01 </label>
-                    </div>
-                    <div className="form-check form-check-inline">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="year"
-                        id="year2"
-                        value="year2"
-                        checked={this.state.year === "Year 02"}
-                        onChange={this.onChangeYear}
-                      />
-                      <label className="form-check-label"> Year 02 </label>
-                    </div>
-                    <div className="form-check form-check-inline">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="year"
-                        id="year3"
-                        value="year3"
-                        checked={this.state.year === "Year 03"}
-                        onChange={this.onChangeYear}
-                      />
-                      <label className="form-check-label"> Year 03 </label>
-                    </div>
-                  </div> */}
                                     <div>
                                         <div className="form-group">
                                             <input type="submit" value="Create Instructor" className="btn waves-effect waves-light" />

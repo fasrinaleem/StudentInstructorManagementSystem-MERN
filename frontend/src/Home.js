@@ -40,7 +40,7 @@ class Home extends Component {
               <Calendar />
             </div>
             <div>
-              <img src={coursesbanner} width="980" />
+              <img src={coursesbanner} width="900" />
             </div>
           </div>
           <section id="boxes">

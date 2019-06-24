@@ -1,0 +1,47 @@
+body{
+    margin:15px;
+    padding:10px;
+}
+.login_head{
+    float: right;
+    margin-right:15px;
+    margin-bottom:20px;
+    margin-top:15px;
+
+}
+
+.headerBack{
+ /*//   background-image: url("../image/header1.jpg");*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login_back{
+    /*//background-image: url("../image/login.jpg");*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius:25px;
+    height:65%;
+    padding:20px;
+}
+
+.heading{
+    font-family: 'B612 Mono', monospace;
+    font-family: 'Oswald', sans-serif;
+    color:#005cbf;
+}
+.l_text {
+    font-family: 'Oswald', sans-serif;
+    color: #e2e3e5;
+}
+
+.homeImg{
+    margin:10px;
+    position: center;
+    border-radius:25px;
+    border-color:black;
+
+
+}
