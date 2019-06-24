@@ -5,9 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AssignmentUpload from "./AssignmentUpload";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import AssignmentLink from "./LinkAssignment";
+import CourseList from "../courseManagement/CourseList";
+import ViewCourse from "../courseManagement/ViewCourse";
 
 class StudentDashboard extends Component {
- 
   render() {
     return (
       <div className="container">
@@ -30,11 +31,14 @@ class StudentDashboard extends Component {
           </div>
           <div>
             <Link to={"/assignmentlink"}> View Assignments </Link>{" "}
+            <Link to={"/courselist"}> View Courses </Link>{" "}
           </div>
+
           <Route path="/assignmentupload" component={AssignmentUpload} />
           <Route path="/assignmentlink" component={AssignmentLink} />
+          <Route path="/courselist" component={CourseList} />
+          <Route path="/viewcourse" component={ViewCourse} />
         </Router>
-
       </div>
     );
   }

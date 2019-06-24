@@ -66,7 +66,7 @@ class CourseList extends Component {
             </Link>
             {"  "}
             <Link
-              to={"/courseentroll/" + currentCourse._id}
+              to={"/assignmentlink/" + currentCourse._id}
               className=" btn btn-success"
               style={{
                 fontSize: "15px",

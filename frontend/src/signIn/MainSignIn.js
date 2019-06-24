@@ -7,6 +7,7 @@ import courseimg from "../img/coursesimage.png";
 import studentimg from "../img/studentimage.jpg";
 import instructorimg from "../img/instructorimage.jpg";
 import adminimage from "../img/adminimage.jpg";
+import studentdashboard from "../img/studentdashboard.png";
 
 export default class MainSignIn extends Component {
   render() {
@@ -20,43 +21,29 @@ export default class MainSignIn extends Component {
                 {" "}
                 <Link to="/studentsignin"> Student </Link>
               </h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                mi augue, viverra sit amet ultricies
-              </p>
             </div>
             <div class="box">
               <img src={instructorimg} width="500" />
               <h3>
                 {" "}
-                <Link to="/instructordashboard"> Instructor </Link>
+                <Link to="/instructordashboard"> Instructor Dashboard </Link>
               </h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                mi augue, viverra sit amet ultricies
-              </p>
             </div>
+
             <div class="box">
-              <img src={instructorimg} width="500" />
+              <img src={studentdashboard} width="500" />
               <h3>
                 {" "}
-                <Link to="/instructor"> Instructor Management</Link>
+                <Link to="/studentdashbord"> Student Dashboard </Link>
               </h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                mi augue, viverra sit amet ultricies
-              </p>
             </div>
+
             <div class="box">
               <img src={adminimage} width="500" />
               <h3>
                 {" "}
                 <Link to="/adminsignin"> Admin </Link>
               </h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                mi augue, viverra sit amet ultricies
-              </p>
             </div>
           </div>
         </section>

@@ -1,9 +1,10 @@
 const express = require("express");
+const router = express.Router();
 const studentRoutes = express.Router();
 const StudentModel = require("./studentSchema");
 
 const nodemailer = require("nodemailer");
-const mongoose=require('mongoose');
+const mongoose = require("mongoose");
 
 const checkAuth = require("./auth/checkAuthStudent");
 
@@ -42,10 +43,9 @@ studentRoutes.route("/add").post(function(req, res) {
   //     res.status(400).send("Adding new student failed");
   //   });
 
-  StudentModel
-    .find({
-      studentID: req.body.studentID
-    })
+  StudentModel.find({
+    studentID: req.body.studentID
+  })
     .exec()
     .then(student => {
       if (student.length >= 1) {
@@ -54,7 +54,7 @@ studentRoutes.route("/add").post(function(req, res) {
         });
       } else {
         const studentModel = new StudentModel({
-          _id: mongoose.Types.ObjectId(),        
+          _id: mongoose.Types.ObjectId(),
           studentName: req.body.studentName,
           studentID: req.body.studentID,
           email: req.body.email,
@@ -135,58 +135,54 @@ studentRoutes.route("/add").post(function(req, res) {
 
 //-----------------------------LOGIN--------------------
 
-  //login
-  studentRoutes.route("/student/login").post(function(req, res) {
-
-    //console.log(req.body.studentID)
-    Studentmodel.find({studentID:req.body.studentID})
+//login
+router.post("/students/login", (req, res) => {
+  console.log(req.body.studentID);
+  Studentmodel.find({ studentID: req.body.studentID })
     .exec()
-    .then(student=>{
-        console.log(student)
-        if(student.length<1){
-            return res.status(401).json({
-                message:'Authorization Failed!'
-            });
-        }
-        if(student){
-           //correct password
-            const token=jwt.sign({
-                   id:student[0]._id,
-                   studentID:student[0].studentID,
-                   userType:student[0].userType
-
-            },
-            JWT_KEY,
-            {
-                 expiresIn: "1h"
-            }
-            );
-            console.log(student);
-             return res.status(200).json({
-                message:'Authorization Success',
-                token:token
-             });
-        }
-        res.status(401).json({
-            message:'Authorization Failed!'
+    .then(student => {
+      console.log(student);
+      if (student.length < 1) {
+        return res.status(401).json({
+          message: "Authorization Failed!"
         });
-    }).catch(err=>{
-    console.log(err);
-    res.status(500).json({
-        error:err
+      }
+      if (student) {
+        //correct password
+        const token = jwt.sign(
+          {
+            id: student[0]._id,
+            studentID: student[0].studentID,
+            userType: student[0].userType
+          },
+          JWT_KEY,
+          {
+            expiresIn: "1h"
+          }
+        );
+        console.log(student);
+        return res.status(200).json({
+          message: "Authorization Success",
+          token: token
+        });
+      }
+      res.status(401).json({
+        message: "Authorization Failed!"
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
     });
-})
-
 });
-
-
 
 //Update the student details
 studentRoutes.route("/update/:id").post(function(req, res) {
   StudentModel.findById(req.params.id, function(err, studentmodel) {
     if (!studentmodel) res.status(404).send("Data is not found");
-    else 
-    studentmodel.studentName = req.body.studentName;
+    else studentmodel.studentName = req.body.studentName;
     studentmodel.studentID = req.body.studentID;
 
     studentmodel.email = req.body.email;

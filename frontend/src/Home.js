@@ -12,6 +12,15 @@ import MainSignIn from "./signIn/MainSignIn";
 import Calendar from "./Calender";
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+  onSubmit(e) {
+    e.preventDefault();
+
+    this.props.history.push("/mainsignin");
+  }
   render() {
     return (
       <Router>
@@ -26,8 +35,8 @@ class Home extends Component {
             <div class="container">
               <h1>Login to Brightnerd</h1>
 
-              <form>
-                <input type="email" placeholder="Enter Email..." />
+              <form onSubmit={this.onSubmit}>
+                <input type="text" placeholder="Enter Email..." />
                 <input type="password" placeholder="Enter Password..." />
                 <button type="submit" class="button_1">
                   Login

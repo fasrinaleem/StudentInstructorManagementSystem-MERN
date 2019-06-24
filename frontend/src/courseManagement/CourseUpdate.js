@@ -185,6 +185,7 @@ class CourseUpdate extends Component {
               className="form-control"
               value={this.state.startDate}
               onChange={this.onChangeStartDate}
+              required
             />
           </div>
           <div className="form-group">
@@ -202,6 +203,7 @@ class CourseUpdate extends Component {
             id="instructors"
             name="instructors"
             onChange={this.onChangeInstructor}
+            required
           >
             <option value="">------</option>
             {this.state.instructorsList.map(instructors => {
@@ -219,6 +221,7 @@ class CourseUpdate extends Component {
             id="instructoremail"
             name="instructoremail"
             onChange={this.onChangeInstructorEmail}
+            required
           >
             <option value="">------</option>
             {this.state.instructorsList.map(instructorEmail => {
