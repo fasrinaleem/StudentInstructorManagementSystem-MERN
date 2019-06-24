@@ -16,6 +16,7 @@ import InstructorSignIn from "./signIn/InstructorSignIn";
 import AdminSignIn from "./signIn/AdminSignIn";
 import CourseSignIn from "./signIn/CourseSignIn";
 import InstructorCourseSignIn from "./signIn/InstructorCourseSignIn";
+import StudentDashbord from "./studentManagement/StudentDashboard";
 
 class App extends Component {
   render() {
@@ -43,6 +44,7 @@ class App extends Component {
               path="/instructorcoursesignin"
               component={InstructorCourseSignIn}
             />
+            <Route path="/studentdashbord" component={StudentDashbord} />{" "}
           </Switch>
           <Footer />
         </div>

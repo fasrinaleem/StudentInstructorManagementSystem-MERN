@@ -57,7 +57,7 @@ class StudentSignIn extends Component {
         .then(res => {
           if (res.status === 200) {
             alert("Login Success! Welcome, " + this.state.adminID);
-            this.props.history.push("/admin");
+            this.props.history.push("/studentdashbord");
           } else {
             alert("Login Failed! Please try again!");
           }

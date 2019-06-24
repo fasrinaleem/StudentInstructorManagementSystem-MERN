@@ -6,7 +6,8 @@ import StudentAdd from "./StudentAdd";
 import StudentUpdate from "./StudentUpdate";
 import StudentList from "./StudentList";
 import StudentDelete from "./StudentDelete";
-import StudentManage from "./ManageStudent";
+import StudentSignup from "./Signup/StudentSignup";
+import StudentDashboard from "./StudentDashboard";
 
 // import logo from "./resources/logo.png";
 
@@ -32,7 +33,7 @@ class Students extends Component {
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
                   <Link to="/studentlist" className="nav-link">
-                    Student
+                    Manage Student
                   </Link>
                 </li>
                 <li className="navbar-item">
@@ -40,11 +41,7 @@ class Students extends Component {
                     Add Student
                   </Link>
                 </li>
-                <li className="navbar-item">
-                  <Link to="/managestudent" className="nav-link">
-                    Manage Student
-                  </Link>
-                </li>
+                
               </ul>
             </div>
           </nav>
@@ -53,7 +50,8 @@ class Students extends Component {
           <Route path="/update/:id" component={StudentUpdate} />
           <Route path="/addstudent" component={StudentAdd} />
           <Route path="/delete/:id" component={StudentDelete} />
-          <Route path="/managestudent" component={StudentManage} />
+          <Route path="/studentsignup" component={StudentSignup} />
+          <Route path="/studentdashboard" component={StudentDashboard} />
         </div>
       </Router>
     );

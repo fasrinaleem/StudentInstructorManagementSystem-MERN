@@ -5,21 +5,38 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const Student = props => (
   <tr>
-    <td> {props.student.studentName} </td>{" "}
-    <td> {props.student.instructorName} </td>
-    <td> {props.student.year} </td>{" "}
+    <td> {props.student.studentName} </td> 
+    <td> {props.student.studentID} </td> 
+    <td> {props.student.email} </td>{" "}
+    <td> {props.student.password} </td> 
+    <td> {props.student.nic} </td> 
+    <td> {props.student.course} </td>{" "}
     <td>
-      <Link to={"/update/" + props.student._id}> Edit </Link>{" "}
-      <Link to={"/delete/" + props.student._id}> Delete </Link>{" "}
+      <Link
+        to={"/update/" + props.student._id}
+        className=" btn btn-warning"
+        style={{ fontSize: "15px", width: "100px"  }}
+      >
+        <span> edit</span>
+      </Link>
+      {"  "}
+      <Link
+        to={"/delete/" + props.student._id}
+        className="btn btn-danger"
+        style={{ fontSize: "15px", width: "100px" }}  
+      >
+        <span> delete</span>
+       
+      </Link>
     </td>{" "}
   </tr>
 );
 class StudentList extends Component {
+
   constructor(props) {
     super(props);
     this.state = { students: [] };
   }
-
   componentDidMount() {
     axios
       .get("http://localhost:4000/api/student/")
@@ -30,7 +47,6 @@ class StudentList extends Component {
         console.log(error);
       });
   }
-
   componentDidUpdate() {
     axios
       .get("http://localhost:4000/api/student/")
@@ -41,13 +57,11 @@ class StudentList extends Component {
         console.log(error);
       });
   }
-
   studentList() {
     return this.state.students.map(function(currentStudent, i) {
       return <Student student={currentStudent} key={i} />;
     });
   }
-
   render() {
     return (
       <div>
@@ -56,8 +70,11 @@ class StudentList extends Component {
           <thead>
             <tr>
               <th> student Name </th>
-              <th> Instructor Name </th>
-              <th> Year </th> <th> Actions </th>{" "}
+              <th> student ID </th>
+              <th> Email </th>
+              <th> Password </th>
+              <th> NIC number </th>
+              <th> Course </th>{" "}
             </tr>{" "}
           </thead>{" "}
           <tbody> {this.studentList()} </tbody>{" "}
@@ -66,5 +83,4 @@ class StudentList extends Component {
     );
   }
 }
-
 export default StudentList;

@@ -6,14 +6,23 @@ class StudentUpdate extends Component {
     super(props);
 
     this.onChangeStudentName = this.onChangeStudentName.bind(this);
-    this.onChangeInstructorName = this.onChangeInstructorName.bind(this);
-    //  this.onChangeYear = this.onChangeYear.bind(this);
+    this.onChangeStudentID = this.onChangeStudentID.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeNic = this.onChangeNic.bind(this);
+    this.onChangeCourse = this.onChangeCourse.bind(this);
+  
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       studentName: "",
-      instructorName: ""
-      //     year: ""
+      studentID: "",
+      email: "",
+      password: "",
+      nic: "",
+      course: "",
+      courseList: [],
+      errors: {}
     };
   }
 
@@ -23,14 +32,18 @@ class StudentUpdate extends Component {
       .then(response => {
         this.setState({
           studentName: response.data.studentName,
-          instructorName: response.data.instructorName
+          studentID: response.data.studentID,
+          email: response.data.email,
+          password: response.data.password,
+          nic: response.data.nic,
+          course: response.data.course,
           //        year: response.data.year
         });
       })
       .catch(function(error) {
         console.log(error);
       });
-  }
+   }
 
   onChangeStudentName(e) {
     this.setState({
@@ -38,33 +51,55 @@ class StudentUpdate extends Component {
     });
   }
 
-  onChangeInstructorName(e) {
+  onChangeStudentID(e) {
     this.setState({
-      instructorName: e.target.value
+      studentID: e.target.value
     });
   }
 
-  // onChangeYear(e) {
-  //   this.setState({
-  //     year: e.target.value
-  //   });
-  // }
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value
+    });
+  }
+
+  onChangePassword(e) {
+    this.setState({
+      password: e.target.value
+    });
+  }
+
+
+  onChangeNic(e) {
+    this.setState({
+      nic: e.target.value
+    });
+  }
+
+  onChangeCourse(e) {
+    this.setState({
+      course: e.target.value
+    });
+  }
 
   onSubmit(e) {
     e.preventDefault();
     const updatedStudent = {
       studentName: this.state.studentName,
-      instructorName: this.state.instructorName
-      //      year: this.state.year
+      studentID: this.state.studentID,
+      email: this.state.email,
+      password: this.state.password,
+      nic: this.state.nic,
+      course: this.state.course,
+  
     };
 
     axios
       .post(
-        "http://localhost:4000/api/student/update/" +
-          this.props.match.params.id,
+        "http://localhost:4000/api/student/update/" + this.props.match.params.id,
         updatedStudent
       )
-      .then(res => console.log(res.data));
+      .then(res => console.log(res.data), alert("student updated successfully"));
 
     this.props.history.push("/");
   }
@@ -83,53 +118,61 @@ class StudentUpdate extends Component {
               onChange={this.onChangeStudentName}
             />{" "}
           </div>{" "}
+
           <div className="form-group">
-            <label> Instructor Name </label>{" "}
+            <label> Student ID </label>{" "}
             <input
               type="text"
               className="form-control"
-              value={this.state.instructorName}
-              onChange={this.onChangeInstructorName}
+              value={this.state.studentID}
+              onChange={this.onChangeStudentID}
+            />{" "}
+          </div>{" "}
+
+          <div className="form-group">
+            <label> Email </label>{" "}
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.email}
+              onChange={this.onChangeEmail}
+            />{" "}
+          </div>{" "}
+
+
+          <div className="form-group">
+            <label> Password  </label>{" "}
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.password}
+              onChange={this.onChangePassword}
+            />{" "}
+          </div>{" "}
+
+
+          <div className="form-group">
+            <label> NIC </label>{" "}
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.nic}
+              onChange={this.onChangeNic}
+            />{" "}
+          </div>{" "}
+          <div className="form-group">
+            <label> Course </label>{" "}
+            <input
+              type="text"
+              className="form-control"
+              value={this.state.course}
+              onChange={this.onChangeCourse}
             />{" "}
           </div>{" "}
           <div className="form-group">
             {" "}
-            {/* <div className="form-check form-check-inline">
-                              <input
-                                className="form-check-input"
-                                type="radio"
-                                name="year"
-                                id="year1"
-                                value="year1"
-                                checked={this.state.year === "Year 01"}
-                                onChange={this.onChangeYear}
-                              />
-                              <label className="form-check-label"> Year 01 </label>
-                            </div>
-                            <div className="form-check form-check-inline">
-                              <input
-                                className="form-check-input"
-                                type="radio"
-                                name="year"
-                                id="year2"
-                                value="year2"
-                                checked={this.state.year === "Year 02"}
-                                onChange={this.onChangeYear}
-                              />
-                              <label className="form-check-label"> Year 02 </label>
-                            </div>
-                            <div className="form-check form-check-inline">
-                              <input
-                                className="form-check-input"
-                                type="radio"
-                                name="year"
-                                id="year3"
-                                value="year3"
-                                checked={this.state.year === "Year 03"}
-                                onChange={this.onChangeYear}
-                              />
-                              <label className="form-check-label"> Year 03 </label>
-                            </div> */}
+            
+            
             <br />
             <div className="form-group">
               <input
